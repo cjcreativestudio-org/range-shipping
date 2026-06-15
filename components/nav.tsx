@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -36,13 +37,16 @@ export default function Nav() {
       {/* Main nav */}
       <div className="px-6 md:px-8 py-4 max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-3 group">
-          <svg className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5M12 3v2.25m0 13.5V21M5.25 21H18.75a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75H5.25a.75.75 0 00-.75.75v16.5c0 .414.336.75.75.75z" />
-          </svg>
-          <span className="text-[11px] tracking-[0.2em] uppercase font-semibold text-white/90">
-            Range Shipping
-          </span>
+        <a href="/" className="flex items-center group">
+          <Image
+            src="/logo.jpg"
+            alt="Range Shipping"
+            width={160}
+            height={44}
+            className="h-9 w-auto object-contain"
+            style={{ filter: "brightness(0) invert(1)" }}
+            priority
+          />
         </a>
 
         {/* Desktop nav links */}
@@ -50,7 +54,7 @@ export default function Nav() {
           {[
             { label: "Home", href: "/" },
             { label: "About Us", href: "/about" },
-            { label: "Dry-Bulk Chartering", href: "/dry-bulk" },
+            { label: "Services", href: "/dry-bulk" },
             { label: "Contact", href: "/contact" },
           ].map((item) => (
             <a
@@ -90,7 +94,7 @@ export default function Nav() {
             {[
               { label: "Home", href: "/" },
               { label: "About Us", href: "/about" },
-              { label: "Dry-Bulk Chartering", href: "/dry-bulk" },
+              { label: "Services", href: "/dry-bulk" },
               { label: "Contact", href: "/contact" },
             ].map((item) => (
               <a
