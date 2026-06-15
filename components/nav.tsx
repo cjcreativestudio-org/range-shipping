@@ -36,7 +36,7 @@ export default function Nav() {
       {/* Main nav */}
       <div className="px-6 md:px-8 py-4 max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
+        <a href="/" className="flex items-center gap-3 group">
           <svg className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5M12 3v2.25m0 13.5V21M5.25 21H18.75a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75H5.25a.75.75 0 00-.75.75v16.5c0 .414.336.75.75.75z" />
           </svg>
@@ -48,12 +48,10 @@ export default function Nav() {
         {/* Desktop nav links */}
         <nav className="hidden lg:flex items-center gap-8">
           {[
+            { label: "Home", href: "/" },
             { label: "About Us", href: "/about" },
-            { label: "Our Service", href: "/dry-bulk" },
-            { label: "Our Fleet", href: "#" },
-            { label: "Investors", href: "#" },
-            { label: "Sustainability", href: "#" },
-            { label: "Careers", href: "#" },
+            { label: "Dry-Bulk Chartering", href: "/dry-bulk" },
+            { label: "Contact", href: "/contact" },
           ].map((item) => (
             <a
               key={item.label}
@@ -67,9 +65,9 @@ export default function Nav() {
 
         {/* CTA */}
         <div className="flex items-center gap-4">
-          <button className="hidden md:block px-5 py-2 border border-white/20 text-[11px] tracking-[0.15em] uppercase text-white/80 hover:bg-white/10 hover:border-white/40 transition-all duration-300">
+          <a href="/contact" className="hidden md:block px-5 py-2 border border-white/20 text-[11px] tracking-[0.15em] uppercase text-white/80 hover:bg-white/10 hover:border-white/40 transition-all duration-300">
             Inquire
-          </button>
+          </a>
           <button
             className="lg:hidden text-white/60 hover:text-white transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -90,12 +88,9 @@ export default function Nav() {
         <div className="lg:hidden bg-[#000613]/95 backdrop-blur-xl border-t border-white/5 px-6 pb-6">
           <nav className="flex flex-col gap-4 pt-4">
             {[
+              { label: "Home", href: "/" },
               { label: "About Us", href: "/about" },
-              { label: "Our Service", href: "/dry-bulk" },
-              { label: "Our Fleet", href: "#" },
-              { label: "Investors", href: "#" },
-              { label: "Sustainability", href: "#" },
-              { label: "Careers", href: "#" },
+              { label: "Dry-Bulk Chartering", href: "/dry-bulk" },
               { label: "Contact", href: "/contact" },
             ].map((item) => (
               <a
@@ -106,9 +101,9 @@ export default function Nav() {
                 {item.label}
               </a>
             ))}
-            <button className="mt-2 px-5 py-2 border border-white/20 text-[11px] tracking-[0.15em] uppercase text-white/80 self-start hover:bg-white/10 transition-all">
+            <a href="/contact" className="mt-2 px-5 py-2 border border-white/20 text-[11px] tracking-[0.15em] uppercase text-white/80 self-start hover:bg-white/10 transition-all">
               Inquire
-            </button>
+            </a>
           </nav>
         </div>
       )}
