@@ -23,13 +23,13 @@ export default function Nav() {
       {/* Utility bar */}
       <div className="hidden md:block border-b border-white/5 py-1 px-8">
         <div className="max-w-7xl mx-auto flex justify-end items-center gap-8">
-          <button className="flex items-center gap-1 text-white/40 hover:text-white/70 transition-colors">
+          <button className="flex items-center gap-1 text-white/55 hover:text-white/80 transition-colors">
             <span className="text-[10px] tracking-[0.15em] uppercase font-medium">Contacts</span>
           </button>
-          <button className="flex items-center gap-1 text-white/40 hover:text-white/70 transition-colors">
+          <button className="flex items-center gap-1 text-white/55 hover:text-white/80 transition-colors">
             <span className="text-[10px] tracking-[0.15em] uppercase font-medium">EN</span>
           </button>
-          <p className="text-[9px] text-white/20 italic">Data delayed at least 15 minutes</p>
+          <p className="text-[9px] text-white/35 italic">Data delayed at least 15 minutes</p>
         </div>
       </div>
 

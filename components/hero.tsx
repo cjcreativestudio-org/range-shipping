@@ -89,6 +89,9 @@ export default function Hero() {
   const lastExactRef = useRef<number>(-1);
   const rafIdRef = useRef<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [reducedMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 
   const drawFrame = useCallback(() => {
     const canvas = canvasRef.current;
@@ -103,6 +106,13 @@ export default function Hero() {
 
   useEffect(() => {
     if (!loaded) return;
+    if (reducedMotion) {
+      // Skip to last frame immediately; no animation loop
+      exactIndexRef.current = FRAME_COUNT - 1;
+      drawFrame();
+      setScrollProgress(1);
+      return;
+    }
     const loop = () => {
       drawFrame();
       rafIdRef.current = requestAnimationFrame(loop);
@@ -111,9 +121,10 @@ export default function Hero() {
     return () => {
       if (rafIdRef.current !== null) cancelAnimationFrame(rafIdRef.current);
     };
-  }, [loaded, drawFrame]);
+  }, [loaded, drawFrame, reducedMotion]);
 
   useEffect(() => {
+    if (reducedMotion) return;
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
@@ -174,16 +185,16 @@ export default function Hero() {
         {/* Loading bar */}
         {!loaded && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 z-30">
-            <p className="text-[0.6rem] tracking-[0.4em] text-white/40 uppercase mb-6">
+            <p className="text-[0.6rem] tracking-[0.4em] text-white/60 uppercase mb-6">
               Range Shipping
             </p>
-            <div className="w-48 h-[1px] bg-white/10 relative overflow-hidden">
+            <div className="w-48 h-[1px] bg-white/15 relative overflow-hidden">
               <div
-                className="absolute top-0 left-0 h-full bg-white/60 transition-all duration-150"
+                className="absolute top-0 left-0 h-full bg-white/70 transition-all duration-150"
                 style={{ width: `${progress * 100}%` }}
               />
             </div>
-            <p className="text-[0.55rem] tracking-[0.3em] text-white/25 uppercase mt-4">
+            <p className="text-[0.55rem] tracking-[0.3em] text-white/50 uppercase mt-4">
               Loading
             </p>
           </div>
@@ -207,7 +218,7 @@ export default function Hero() {
                 <p className="text-base md:text-lg font-light tracking-[0.25em] text-white/90 uppercase leading-tight mb-3">
                   {block.lines.join(" ")}
                 </p>
-                <p className="text-xs tracking-[0.2em] text-white/45 uppercase">
+                <p className="text-xs tracking-[0.2em] text-white/60 uppercase">
                   {block.sub}
                 </p>
               </div>
@@ -225,7 +236,7 @@ export default function Hero() {
           }}
         >
           <div className="text-center select-none">
-            <p className="text-[0.6rem] md:text-[0.65rem] tracking-[0.45em] text-white/40 uppercase mb-4">
+            <p className="text-[0.6rem] md:text-[0.65rem] tracking-[0.45em] text-white/55 uppercase mb-4">
               Global Maritime Logistics
             </p>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.12em] text-white uppercase leading-none">
@@ -241,11 +252,11 @@ export default function Hero() {
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none z-10"
           style={{ opacity: indicatorOpacity }}
         >
-          <span className="text-[0.55rem] tracking-[0.4em] text-white/35 uppercase">
+          <span className="text-[0.55rem] tracking-[0.4em] text-white/55 uppercase">
             Scroll
           </span>
           <div className="w-[1px] h-8 bg-white/15 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1/2 bg-white/50 animate-slideDown" />
+            <div className="absolute top-0 left-0 w-full h-1/2 bg-white/60 animate-slideDown" />
           </div>
         </div>
       </div>
