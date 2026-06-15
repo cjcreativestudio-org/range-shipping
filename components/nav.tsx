@@ -38,15 +38,16 @@ export default function Nav() {
       <div className="px-6 md:px-8 py-4 max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <a href="/" className="flex items-center group">
-          <Image
-            src="/logo.jpg"
-            alt="Range Shipping"
-            width={160}
-            height={44}
-            className="h-9 w-auto object-contain"
-            style={{ filter: "brightness(0) invert(1)" }}
-            priority
-          />
+          <div className="bg-white/95 px-3 py-1.5 rounded-sm">
+            <Image
+              src="/logo.jpg"
+              alt="Range Shipping"
+              width={140}
+              height={38}
+              className="h-8 w-auto object-contain"
+              priority
+            />
+          </div>
         </a>
 
         {/* Desktop nav links */}
