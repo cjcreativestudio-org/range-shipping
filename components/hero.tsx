@@ -175,7 +175,7 @@ export default function Hero() {
   const indicatorOpacity = clamp01(1 - scrollProgress / 0.08);
 
   return (
-    <section ref={sectionRef} className="relative h-[500vh]">
+    <section ref={sectionRef} className="relative h-[500vh] isolate">
       <div className="sticky top-0 h-screen overflow-hidden bg-black">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 

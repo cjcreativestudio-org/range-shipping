@@ -20,10 +20,13 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Stats />
-        <Operations />
-        <Sustainability />
-        <Corporate />
+        {/* Curtain wrapper — slides over the pinned canvas as a unified dark sheet */}
+        <div className="relative z-10 -mt-[40vh]">
+          <Stats />
+          <Operations />
+          <Sustainability />
+          <Corporate />
+        </div>
       </main>
       <Footer />
     </>
