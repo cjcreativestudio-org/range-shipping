@@ -47,13 +47,20 @@ export default function Nav() {
 
         {/* Desktop nav links */}
         <nav className="hidden lg:flex items-center gap-8">
-          {["About Us", "Our Service", "Our Fleet", "Investors", "Sustainability", "Careers"].map((item) => (
+          {[
+            { label: "About Us", href: "/about" },
+            { label: "Our Service", href: "#" },
+            { label: "Our Fleet", href: "#" },
+            { label: "Investors", href: "#" },
+            { label: "Sustainability", href: "#" },
+            { label: "Careers", href: "#" },
+          ].map((item) => (
             <a
-              key={item}
-              href="#"
+              key={item.label}
+              href={item.href}
               className="text-[11px] tracking-[0.1em] uppercase text-white/50 hover:text-white transition-colors duration-200"
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
