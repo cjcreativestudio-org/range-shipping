@@ -23,9 +23,9 @@ export default function Nav() {
       {/* Utility bar */}
       <div className="hidden md:block border-b border-white/5 py-1 px-8">
         <div className="max-w-7xl mx-auto flex justify-end items-center gap-8">
-          <button className="flex items-center gap-1 text-white/55 hover:text-white/80 transition-colors">
+          <a href="/contact" className="flex items-center gap-1 text-white/55 hover:text-white/80 transition-colors">
             <span className="text-[10px] tracking-[0.15em] uppercase font-medium">Contacts</span>
-          </button>
+          </a>
           <button className="flex items-center gap-1 text-white/55 hover:text-white/80 transition-colors">
             <span className="text-[10px] tracking-[0.15em] uppercase font-medium">EN</span>
           </button>
@@ -89,13 +89,21 @@ export default function Nav() {
       {menuOpen && (
         <div className="lg:hidden bg-[#000613]/95 backdrop-blur-xl border-t border-white/5 px-6 pb-6">
           <nav className="flex flex-col gap-4 pt-4">
-            {["About Us", "Our Service", "Our Fleet", "Investors", "Sustainability", "Careers"].map((item) => (
+            {[
+              { label: "About Us", href: "/about" },
+              { label: "Our Service", href: "/dry-bulk" },
+              { label: "Our Fleet", href: "#" },
+              { label: "Investors", href: "#" },
+              { label: "Sustainability", href: "#" },
+              { label: "Careers", href: "#" },
+              { label: "Contact", href: "/contact" },
+            ].map((item) => (
               <a
-                key={item}
-                href="#"
+                key={item.label}
+                href={item.href}
                 className="text-[11px] tracking-[0.1em] uppercase text-white/60 hover:text-white transition-colors"
               >
-                {item}
+                {item.label}
               </a>
             ))}
             <button className="mt-2 px-5 py-2 border border-white/20 text-[11px] tracking-[0.15em] uppercase text-white/80 self-start hover:bg-white/10 transition-all">
