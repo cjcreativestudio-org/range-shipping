@@ -21,7 +21,7 @@ export default function Home() {
       <main>
         <Hero />
         {/* Curtain wrapper — slides over the pinned canvas as a unified dark sheet */}
-        <div className="relative z-10 -mt-[40vh]">
+        <div className="relative z-10 -mt-[100vh]">
           <Stats />
           <Operations />
           <Sustainability />
