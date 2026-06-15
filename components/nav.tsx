@@ -49,7 +49,7 @@ export default function Nav() {
         <nav className="hidden lg:flex items-center gap-8">
           {[
             { label: "About Us", href: "/about" },
-            { label: "Our Service", href: "#" },
+            { label: "Our Service", href: "/dry-bulk" },
             { label: "Our Fleet", href: "#" },
             { label: "Investors", href: "#" },
             { label: "Sustainability", href: "#" },
