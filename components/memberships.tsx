@@ -3,8 +3,8 @@
 import { useRef, useEffect, useState } from "react";
 import { getLenis } from "@/lib/lenis";
 
-const CARD_W = 28;
-const CARD_GAP = 3;
+const CARD_W = 21;
+const CARD_GAP = 2.5;
 const STEP = CARD_W + CARD_GAP;
 const ANIM_END = 0.75;
 const PHASE = ANIM_END / 3;
@@ -74,13 +74,14 @@ function Modal({ m, onClose }: { m: Membership; onClose: () => void }) {
           Close
         </button>
 
-        {/* Logo */}
-        <div className="h-16 flex items-center mb-8">
+        {/* Logo — always on white so transparency shows correctly */}
+        <div className="h-16 flex items-center bg-white mb-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={m.logo}
             alt={m.name}
-            className="max-h-full max-w-[180px] object-contain"
+            className="max-h-full max-w-[200px] object-contain"
+            style={{ background: "white" }}
           />
         </div>
 
@@ -157,27 +158,26 @@ export default function Memberships() {
 
   return (
     <>
-      <div ref={containerRef} className="relative min-h-[250vh] bg-white border-t border-black/5">
-        <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
+      {/* Reduced scroll capture — 180vh keeps it compact */}
+      <div ref={containerRef} className="relative min-h-[180vh] border-t border-black/5">
+        <div
+          className="sticky top-0 h-screen flex flex-col overflow-hidden"
+          style={{ background: "linear-gradient(to bottom, #ffffff 50%, #0074D9 50%)" }}
+        >
 
-          {/* Section header */}
-          <div className="flex-none pt-10 pb-5 px-6 md:px-12">
-            <p className="text-[0.55rem] tracking-[0.45em] text-[#001f3f]/35 uppercase mb-4">
+          {/* Compact horizontal header */}
+          <div className="flex-none flex items-baseline gap-6 md:gap-10 pt-8 pb-4 px-6 md:px-12 flex-wrap">
+            <p className="text-[0.5rem] tracking-[0.45em] text-[#001f3f]/35 uppercase whitespace-nowrap">
               Industry Memberships
             </p>
             <h2
               className="font-bold text-[#001f3f]"
-              style={{
-                fontSize: "clamp(2.5rem, 4.5vw, 4.5rem)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.02em",
-                textWrap: "balance",
-              } as React.CSSProperties}
+              style={{ fontSize: "clamp(1.4rem, 2.2vw, 2rem)", lineHeight: 1.1, letterSpacing: "-0.02em" }}
             >
-              Recognised by<br />Global Bodies
+              Recognised by Global Bodies
             </h2>
-            <p className="text-[14px] font-light text-[#001f3f]/45 mt-4 max-w-md leading-relaxed">
-              Active membership in the world&apos;s foremost maritime institutions. Click any to learn more.
+            <p className="hidden md:block text-[12px] font-light text-[#001f3f]/40 leading-relaxed ml-auto">
+              Click any membership to learn more.
             </p>
           </div>
 
@@ -194,7 +194,7 @@ export default function Memberships() {
               return (
                 <div
                   key={i}
-                  className={`absolute top-0 bottom-0 group ${isReady ? "cursor-pointer" : "cursor-default"}`}
+                  className={`absolute top-4 bottom-4 group ${isReady ? "cursor-pointer" : "cursor-default"}`}
                   style={{
                     width: `${CARD_W}vw`,
                     left: "50%",
@@ -209,35 +209,36 @@ export default function Memberships() {
                   onKeyDown={(e) => e.key === "Enter" && isReady && setSelected(m)}
                   aria-label={`Learn more about ${m.name}`}
                 >
-                  <div className="border border-black/8 h-full flex flex-col justify-between p-8 md:p-10 bg-white transition-all duration-300 group-hover:border-[#001f3f]/15 group-hover:shadow-[0_8px_32px_rgba(0,31,63,0.07)]">
+                  <div className="border border-black/8 h-full flex flex-col justify-between p-5 md:p-6 bg-white transition-all duration-300 group-hover:border-[#001f3f]/15 group-hover:shadow-[0_8px_32px_rgba(0,31,63,0.1)]">
 
-                    {/* Logo */}
-                    <div className="h-14 flex items-center">
+                    {/* Logo — explicit white bg fills any PNG transparency */}
+                    <div className="h-20 flex items-center" style={{ background: "white" }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={m.logo}
                         alt={m.name}
-                        className="max-h-full max-w-[140px] object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+                        className="max-h-full max-w-[160px] object-contain opacity-85 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ background: "white" }}
                       />
                     </div>
 
                     {/* Card body */}
                     <div>
-                      <h3 className="text-xl md:text-2xl font-semibold text-[#001f3f] leading-snug mb-3">
+                      <h3 className="text-base md:text-lg font-semibold text-[#001f3f] leading-snug mb-2">
                         {m.name}
                       </h3>
-                      <div className="w-6 h-[1px] bg-[#0074D9]/50 mb-5" />
-                      <p className="text-[13px] font-light leading-relaxed text-[#001f3f]/50 group-hover:text-[#001f3f]/70 transition-colors duration-300">
+                      <div className="w-5 h-[1px] bg-[#0074D9]/50 mb-3" />
+                      <p className="text-[12px] font-light leading-relaxed text-[#001f3f]/50 group-hover:text-[#001f3f]/70 transition-colors duration-300">
                         {m.tagline}
                       </p>
                     </div>
 
                     {/* Expand hint */}
-                    <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="text-[10px] tracking-[0.3em] text-[#001f3f]/35 uppercase">
+                    <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="text-[9px] tracking-[0.3em] text-[#001f3f]/35 uppercase">
                         Learn more
                       </span>
-                      <div className="flex-1 h-[1px] bg-black/10 max-w-[2rem]" />
+                      <div className="flex-1 h-[1px] bg-black/10 max-w-[1.5rem]" />
                     </div>
                   </div>
                 </div>
@@ -245,16 +246,16 @@ export default function Memberships() {
             })}
           </div>
 
-          {/* Progress dashes */}
-          <div className="flex-none flex justify-center gap-2 pb-8">
+          {/* Progress dashes — white on the blue lower half */}
+          <div className="flex-none flex justify-center gap-2 pb-6">
             {MEMBERSHIPS.map((_, i) => (
               <div
                 key={i}
                 className="h-[1px]"
                 style={{
-                  width: activeIndex === i ? "32px" : "10px",
+                  width: activeIndex === i ? "28px" : "8px",
                   backgroundColor:
-                    activeIndex === i ? "#0074D9" : "rgba(0,31,63,0.15)",
+                    activeIndex === i ? "white" : "rgba(255,255,255,0.35)",
                   transition: reducedMotion
                     ? "none"
                     : `width 0.4s ${EASE_OUT_QUART_CSS}, background-color 0.4s ${EASE_OUT_QUART_CSS}`,
