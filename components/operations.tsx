@@ -95,10 +95,10 @@ export default function Operations() {
             src="/bulk-carrier.png"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-20 pointer-events-none select-none"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-50 pointer-events-none select-none"
           />
-          {/* Dark gradient overlay so text remains legible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f]/80 via-[#001f3f]/60 to-[#001f3f]/20 pointer-events-none" />
+          {/* Subtle overlay to keep text legible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f]/60 via-[#001f3f]/30 to-transparent pointer-events-none" />
           <div className="relative z-10 flex flex-col">
           <h2
             className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.0] tracking-tight mb-8"
