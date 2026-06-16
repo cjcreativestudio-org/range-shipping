@@ -121,7 +121,7 @@ export default function Memberships() {
       <section
         ref={sectionRef}
         className="relative border-t border-black/5"
-        style={{ background: "linear-gradient(to bottom, #ffffff 50%, #001f3f 50%)" }}
+        style={{ background: "#ffffff" }}
       >
         <div className="max-w-6xl mx-auto px-6 md:px-12 pt-10 pb-12">
 
