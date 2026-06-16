@@ -3,6 +3,7 @@ import Hero from "@/components/hero";
 import Operations from "@/components/operations";
 import Sustainability from "@/components/sustainability";
 import Corporate from "@/components/corporate";
+import Memberships from "@/components/memberships";
 import Inquiry from "@/components/inquiry";
 import Footer from "@/components/footer";
 import LenisProvider from "@/components/lenis-provider";
@@ -18,6 +19,7 @@ export default function Home() {
           <Operations />
           <Sustainability />
           <Corporate />
+          <Memberships />
           <Inquiry />
         </div>
       </main>
