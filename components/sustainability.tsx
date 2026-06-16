@@ -3,6 +3,17 @@
 import { useRef, useEffect, useState } from "react";
 import { getLenis } from "@/lib/lenis";
 
+// Card dimensions (vw units) — drives horizontal stacking math
+const CARD_W = 32;        // each card width in vw
+const CARD_GAP = 2;       // gap between stacked cards in vw
+const STEP = CARD_W + CARD_GAP; // 34vw per card slot
+
+// Animation completes at 75% of total scroll; remaining 25% is dwell time
+const ANIM_END = 0.75;
+const PHASE = ANIM_END / 3; // each card occupies 25% of total scroll
+
+const EASE_OUT_QUART = "cubic-bezier(0.165, 0.84, 0.44, 1)";
+
 const SECTIONS = [
   {
     num: "01",
@@ -25,9 +36,22 @@ function clamp01(v: number) {
   return Math.max(0, Math.min(1, v));
 }
 
+function easeOutQuart(t: number) {
+  return 1 - Math.pow(1 - t, 4);
+}
+
 export default function Sustainability() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,8 +61,7 @@ export default function Sustainability() {
       const sectionHeight = el.offsetHeight;
       const vh = window.innerHeight;
       const raw = (window.scrollY - sectionTop) / (sectionHeight - vh);
-      const p = clamp01(raw);
-      setActiveIndex(Math.min(Math.floor(p * 3), 2));
+      setProgress(clamp01(raw));
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -55,13 +78,15 @@ export default function Sustainability() {
     };
   }, []);
 
+  const activeIndex = Math.min(Math.floor((progress / ANIM_END) * 3), 2);
+
   return (
-    <div ref={containerRef} className="relative min-h-[350vh] bg-[#001f3f] border-t border-white/5">
+    <div ref={containerRef} className="relative min-h-[300vh] bg-[#001f3f] border-t border-white/5">
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
 
-        {/* Centered heading */}
-        <div className="flex-none pt-16 pb-10 px-6 text-center">
-          <p className="text-[0.55rem] tracking-[0.45em] text-white/30 uppercase mb-5">
+        {/* Heading — compact, close to the cards */}
+        <div className="flex-none pt-10 pb-5 px-6 text-center">
+          <p className="text-[0.55rem] tracking-[0.45em] text-white/30 uppercase mb-4">
             Environmental Policy
           </p>
           <h2
@@ -72,65 +97,80 @@ export default function Sustainability() {
             <br />
             Impact
           </h2>
-          <p className="text-[14px] font-light text-white/45 mt-5 max-w-md mx-auto leading-relaxed">
+          <p className="text-[14px] font-light text-white/45 mt-4 max-w-md mx-auto leading-relaxed">
             IMO 2030 compliant across active fleet. Net zero target 2050.
           </p>
         </div>
 
-        {/* Scroll-driven section cards */}
-        <div className="flex-1 flex items-center justify-center relative px-6">
+        {/* Horizontal card strip */}
+        <div className="flex-1 relative overflow-hidden">
           {SECTIONS.map((section, i) => {
-            const isActive = activeIndex === i;
-            const isPast = activeIndex > i;
+            // Progress through this card's entry phase
+            const entryP = clamp01((progress - i * PHASE) / PHASE);
+            const eased = reducedMotion ? entryP : easeOutQuart(entryP);
+
+            // Final X offset from column centre (vw):
+            //   card 0 → left of centre  (−STEP)
+            //   card 1 → at centre       (0)
+            //   card 2 → right of centre (+STEP)
+            // The three cards tile the full viewport width with CARD_GAP between them.
+            const finalX = (i - 1) * STEP;
+
+            // Cards enter from 120vw to the right of centre
+            const currentX = 120 + (finalX - 120) * eased;
+
+            // Fade in during the first quarter of the entry phase
+            const opacity = clamp01(eased / 0.25);
+
             return (
               <div
                 key={i}
-                className="absolute max-w-2xl w-full"
+                className="absolute top-0 bottom-0"
                 style={{
-                  opacity: isActive ? 1 : 0,
-                  transform: isActive
-                    ? "translateY(0px) scale(1)"
-                    : isPast
-                    ? "translateY(-44px) scale(0.97)"
-                    : "translateY(44px) scale(0.97)",
-                  transition: "opacity 0.7s ease, transform 0.7s ease",
-                  pointerEvents: isActive ? "auto" : "none",
+                  width: `${CARD_W}vw`,
+                  left: "50%",
+                  marginLeft: `-${CARD_W / 2}vw`,
+                  transform: `translateX(${currentX}vw)`,
+                  opacity,
+                  willChange: "transform, opacity",
                 }}
               >
-                <div className="border border-white/10 p-8 md:p-12">
-                  <div className="flex items-start gap-6 mb-6">
-                    <span className="text-[0.55rem] tracking-[0.35em] text-white/25 uppercase mt-1 shrink-0">
-                      {section.num}
-                    </span>
-                    <h3 className="text-xl md:text-2xl font-semibold text-white/90 leading-snug">
-                      {section.title}
-                    </h3>
-                  </div>
-                  <p className="text-[15px] font-light leading-relaxed text-white/55 pl-10 border-t border-white/8 pt-6" style={{ textWrap: "pretty" } as React.CSSProperties}>
+                <div className="border border-white/10 h-full flex flex-col justify-center p-8 md:p-10">
+                  <span className="text-[0.55rem] tracking-[0.35em] text-white/25 uppercase mb-4 block">
+                    {section.num}
+                  </span>
+                  <h3 className="text-xl md:text-2xl font-semibold text-white/90 leading-snug mb-6">
+                    {section.title}
+                  </h3>
+                  <div className="w-8 h-[1px] bg-white/15 mb-6" />
+                  <p
+                    className="text-[15px] font-light leading-relaxed text-white/55"
+                    style={{ textWrap: "pretty" } as React.CSSProperties}
+                  >
                     {section.body}
                   </p>
                 </div>
               </div>
             );
           })}
+        </div>
 
-          {/* Progress indicators */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 items-center">
-            {SECTIONS.map((_, i) => (
-              <div
-                key={i}
-                className="rounded-full transition-all duration-300"
-                style={{
-                  width: activeIndex === i ? "28px" : "5px",
-                  height: "5px",
-                  backgroundColor:
-                    activeIndex === i
-                      ? "rgba(255,255,255,0.65)"
-                      : "rgba(255,255,255,0.15)",
-                }}
-              />
-            ))}
-          </div>
+        {/* Progress dashes */}
+        <div className="flex-none flex justify-center gap-2 pb-8">
+          {SECTIONS.map((_, i) => (
+            <div
+              key={i}
+              className="h-[1px]"
+              style={{
+                width: activeIndex === i ? "32px" : "10px",
+                backgroundColor:
+                  activeIndex === i ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.15)",
+                transition: reducedMotion
+                  ? "none"
+                  : `width 0.4s ${EASE_OUT_QUART}, background-color 0.4s ${EASE_OUT_QUART}`,
+              }}
+            />
+          ))}
         </div>
 
       </div>
