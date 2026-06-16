@@ -95,7 +95,7 @@ export default function Sustainability() {
             className="absolute inset-0 w-full h-full object-cover object-center opacity-80 pointer-events-none select-none"
           />
           {/* Overlay to keep text legible */}
-          <div className="absolute inset-0 bg-[#001f3f]/50 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#001f3f]/20 pointer-events-none" />
           <p className="relative z-10 text-[0.55rem] tracking-[0.45em] text-white/30 uppercase mb-4">
             Environmental Policy
           </p>
