@@ -86,27 +86,27 @@ export default function Sustainability() {
 
   return (
     <div ref={containerRef} className="relative min-h-[300vh] bg-[#001f3f] border-t border-white/5">
-      <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col overflow-hidden relative">
+        {/* Banner background image — covers full sticky panel, parallax pans with scroll */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/sustainability-banner.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 w-full opacity-80 pointer-events-none select-none z-0"
+          style={{
+            height: "200%",
+            objectFit: "cover",
+            objectPosition: "center top",
+            transform: `translateY(${bannerParallax * -50}%)`,
+            willChange: "transform",
+          }}
+        />
+        {/* Overlay to keep text legible */}
+        <div className="absolute inset-0 bg-[#001f3f]/20 pointer-events-none z-0" />
 
         {/* Heading — compact, close to the cards */}
-        <div className="flex-none relative pt-10 pb-5 px-6 text-center overflow-hidden">
-          {/* Banner background image — parallax pans from top to bottom with scroll */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/sustainability-banner.png"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-x-0 top-0 w-full opacity-80 pointer-events-none select-none"
-            style={{
-              height: "200%",
-              objectFit: "cover",
-              objectPosition: "center top",
-              transform: `translateY(${bannerParallax * -50}%)`,
-              willChange: "transform",
-            }}
-          />
-          {/* Overlay to keep text legible */}
-          <div className="absolute inset-0 bg-[#001f3f]/20 pointer-events-none" />
+        <div className="flex-none relative pt-10 pb-5 px-6 text-center">
           <p className="relative z-10 text-[0.55rem] tracking-[0.45em] text-white/30 uppercase mb-4">
             Environmental Policy
           </p>
@@ -124,7 +124,7 @@ export default function Sustainability() {
         </div>
 
         {/* Horizontal card strip */}
-        <div className="flex-1 relative overflow-hidden">
+        <div className="flex-1 relative overflow-hidden z-10">
           {SECTIONS.map((section, i) => {
             // Progress through this card's entry phase
             const entryP = clamp01((progress - i * PHASE) / PHASE);
@@ -177,7 +177,7 @@ export default function Sustainability() {
         </div>
 
         {/* Progress dashes */}
-        <div className="flex-none flex justify-center gap-2 pb-8">
+        <div className="flex-none flex justify-center gap-2 pb-8 z-10 relative">
           {SECTIONS.map((_, i) => (
             <div
               key={i}
