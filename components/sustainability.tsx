@@ -86,13 +86,20 @@ export default function Sustainability() {
 
         {/* Heading — compact, close to the cards */}
         <div className="flex-none relative pt-10 pb-5 px-6 text-center overflow-hidden">
-          {/* Banner background image */}
+          {/* Banner background image — parallax pans from top to bottom with scroll */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/sustainability-banner.png"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-80 pointer-events-none select-none"
+            className="absolute inset-x-0 top-0 w-full opacity-80 pointer-events-none select-none"
+            style={{
+              height: "130%",
+              objectFit: "cover",
+              objectPosition: "center top",
+              transform: `translateY(${progress * -23}%)`,
+              willChange: "transform",
+            }}
           />
           {/* Overlay to keep text legible */}
           <div className="absolute inset-0 bg-[#001f3f]/20 pointer-events-none" />
