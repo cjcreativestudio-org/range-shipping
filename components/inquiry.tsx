@@ -7,7 +7,7 @@ export default function Inquiry() {
             Commercial Desk
           </p>
           <h2
-            className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight max-w-lg"
+            className="text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight max-w-lg"
             style={{ textWrap: "balance" } as React.CSSProperties}
           >
             Ready to discuss a transaction?

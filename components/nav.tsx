@@ -1,83 +1,63 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { List, X } from "@phosphor-icons/react";
+import Image from "next/image";
 
 const links = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/dry-bulk" },
+  { label: "Corporate Overview", href: "/corporate-overview" },
   { label: "Contact", href: "/contact" },
 ];
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setScrolled(!entry.isIntersecting),
-      { threshold: 0 }
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
+    // Keep sentinel ref mounted for potential future use
   }, []);
 
   return (
     <>
-      {/* Sentinel — sits 60px below top; when it leaves viewport the nav is "scrolled" */}
       <div ref={sentinelRef} className="absolute top-[60px] left-0 h-px w-full pointer-events-none" aria-hidden />
 
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-[#001f3f]/90 backdrop-blur-xl border-b border-white/5"
-            : "bg-transparent"
-        }`}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-gray-100/60">
         {/* Main nav */}
-        <div className="px-6 md:px-8 py-4 max-w-7xl mx-auto flex justify-between items-center">
-          {/* Logo */}
-          <a href="/" className="flex items-center">
-            <div className="bg-white/95 px-3 py-1.5 rounded-sm">
-              <Image
-                src="/logo.jpg"
-                alt="Range Shipping"
-                width={140}
-                height={38}
-                className="h-8 w-auto object-contain"
-                priority
-              />
-            </div>
-          </a>
+        <div className="px-6 md:px-8 py-3 max-w-7xl mx-auto relative flex items-center justify-center">
 
-          {/* Desktop nav links */}
-          <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+          {/* Logo — pinned left */}
+          <div className="absolute left-6 md:left-8">
+            <a href="/">
+              <Image src="/logo.png" alt="Range Shipping" width={120} height={60} className="h-10 w-auto object-contain" />
+            </a>
+          </div>
+
+          {/* Desktop nav links — centred */}
+          <nav className="hidden lg:flex items-center gap-10" aria-label="Main navigation">
             {links.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-[11px] tracking-[0.1em] uppercase text-white/50 hover:text-white transition-colors duration-200"
+                className="text-[15px] font-bold tracking-wide text-[#001f3f] hover:text-[#001f3f]/60 transition-colors duration-200"
               >
                 {item.label}
               </a>
             ))}
           </nav>
 
-          {/* CTA + mobile toggle */}
-          <div className="flex items-center gap-4">
+          {/* CTA — pinned right */}
+          <div className="absolute right-6 md:right-8 flex items-center gap-4">
             <a
               href="/contact"
               className="hidden md:block px-5 py-2 bg-crimson border border-crimson text-[11px] tracking-[0.15em] uppercase text-white hover:bg-crimson/80 transition-colors duration-200 active:scale-[0.97] active:transition-none"
             >
-              Inquire
+              Enquire
             </a>
             <button
-              className="lg:hidden text-white/60 hover:text-white transition-colors p-1"
+              className="lg:hidden text-gray-500 hover:text-gray-900 transition-colors p-1"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -91,7 +71,7 @@ export default function Nav() {
         {/* Mobile menu */}
         <div
           id="rs-mobile-menu"
-          className={`lg:hidden overflow-hidden transition-all duration-300 bg-[#001f3f]/95 backdrop-blur-xl border-t border-white/5 ${
+          className={`lg:hidden overflow-hidden transition-all duration-300 bg-white/95 backdrop-blur-md border-t border-gray-100 ${
             menuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
@@ -100,7 +80,7 @@ export default function Nav() {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-[11px] tracking-[0.1em] uppercase text-white/60 hover:text-white transition-colors"
+                className="text-[15px] font-bold tracking-wide text-[#001f3f] hover:text-[#001f3f]/60 transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 {item.label}
@@ -110,7 +90,7 @@ export default function Nav() {
               href="/contact"
               className="mt-2 px-5 py-2 bg-crimson border border-crimson text-[11px] tracking-[0.15em] uppercase text-white self-start hover:bg-crimson/80 transition-colors active:scale-[0.97] active:transition-none"
             >
-              Inquire
+              Enquire
             </a>
           </nav>
         </div>

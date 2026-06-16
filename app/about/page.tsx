@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About | Range Shipping",
-  description: "Founded in 2017 and headquartered in London, Range Shipping operates a specialised fleet within the Handysize and Panamax dry bulk sectors.",
+  description: "Founded in 2017 and headquartered in London, Range Shipping is a privately owned shipping company specialising in the commercial operation of dry-bulk vessels.",
 };
 
 export default function AboutPage() {
@@ -16,43 +16,50 @@ export default function AboutPage() {
         {/* Hero */}
         <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
           <div className="max-w-6xl mx-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-4 bg-crimson" />
+              <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">About Us</p>
+            </div>
             <h1
-              className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-2xl"
-              style={{ textWrap: "balance" } as React.CSSProperties}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-3xl"
             >
               About Range<br />Shipping
             </h1>
-            <p className="text-[18px] font-light leading-relaxed text-white/65 max-w-xl" style={{ textWrap: "pretty" } as React.CSSProperties}>
-              Prioritising health, safety, quality, and environmental responsibility across global maritime logistics.
+            <p className="text-[18px] font-light leading-relaxed text-white/65 max-w-xl">
+              Prioritising Health, Safety, Quality, and Environmental Responsibility.
             </p>
           </div>
         </section>
 
-        {/* Overview: text + image */}
+        {/* Overview */}
         <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-28 border-b border-white/5">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-4 bg-crimson" />
+                <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">Overview</p>
+              </div>
               <h2
-                className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-8"
-                style={{ textWrap: "balance" } as React.CSSProperties}
+                className="text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-8"
               >
-                Global Reach,<br />Deep Expertise
+                Privately Owned.<br />Commercially Driven.
               </h2>
-              <p className="text-[16px] font-light leading-relaxed text-white/65 mb-5 max-w-lg" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                Founded in 2017 and headquartered in London, Range Shipping operates a highly specialised fleet within the Handysize and Panamax sectors. Our institutional approach to global logistics ensures precision, reliability, and data integrity in high-stakes environments.
+              <p className="text-[16px] font-light leading-relaxed text-white/65 mb-5 max-w-lg">
+                Established in 2017 and headquartered in London, Range Shipping is a privately owned shipping company specialising in the commercial operation of dry-bulk vessels across the Handysize and Panamax sectors. Since our establishment, we have built our business around delivering reliable, flexible, and commercially driven shipping solutions to clients operating in global bulk commodity markets.
               </p>
-              <p className="text-[16px] font-light leading-relaxed text-white/55 max-w-lg" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                Rigorous commercial models and an unyielding commitment to operational excellence deliver consistent returns in a volatile global market.
+              <p className="text-[16px] font-light leading-relaxed text-white/55 max-w-lg">
+                Our expertise spans the full operational management of bulk carriers, with a strong focus on efficiency, transparency, and long-term partnerships. With in-depth market knowledge and extensive industry experience, we actively operate within the Handysize to Panamax segments, providing tailored voyage and time charter solutions that meet the evolving requirements of charterers, traders, and shipowners worldwide.
               </p>
             </div>
             <div className="relative aspect-[4/3] overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-white/15 z-10" />
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-crimson/40 z-10" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuASVPfrWprNwflxYDqC9tHcnXVgInugs0Ps6aCBXT0HLBm65ZJE6eE8h7xvYki6T_ynxpWYmnNxLDp3d-X_kXX-WXV7HvwUp56ptDVDBK-7Fd36sYAOw2JhLSTkeqMYC6Twwv2n6OL3dz2dbh02EQYkVvrsYp0Kpg210z_BULhKHKjCopPcvk93vEaWn0YK_WqQtb47_pkYeQhCpprOK4FS6mRTIuYD56sFr2JGP7cLigH19gV7hYKsapKgElMQZCJ8kP9YIG28ACo"
-                alt="Range Shipping corporate maritime office overlooking an industrial port"
-                className="w-full h-full object-cover grayscale opacity-80"
+                src="/vessels/tomini-unity.png"
+                alt="Range Shipping vessel at sea"
+                className="w-full h-full object-cover opacity-90 saturate-[0.6]"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#001f3f]/50 to-transparent" />
             </div>
           </div>
         </section>
@@ -61,30 +68,36 @@ export default function AboutPage() {
         <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-28 border-b border-white/5">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-4">
-              <h2
-                className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight"
-                style={{ textWrap: "balance" } as React.CSSProperties}
-              >
-                Active in the S&amp;P Market
-              </h2>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-4 bg-crimson" />
+                <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">S&P Market</p>
               </div>
+              <h2
+                className="text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight"
+              >
+                Active in the<br />S&amp;P Market
+              </h2>
+            </div>
             <div className="lg:col-span-8">
-              <p className="text-[17px] font-light leading-relaxed text-white/65 mb-5" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                Range Shipping remains highly active in the Sale and Purchase market, acting strictly as a principal. We specialise in structuring complex transactions, securing strategic assets, and maintaining an agile portfolio to capitalise on shifting global trade dynamics.
+              <p className="text-[17px] font-light leading-relaxed text-white/65 mb-5">
+                In addition to our commercial operations, Range Shipping is actively involved in the Sale &amp; Purchase (S&amp;P) market. We participate both on a principal basis and by structuring transactions on behalf of our clients, offering strategic guidance and market insight throughout the acquisition and disposal process.
               </p>
-              <p className="text-[16px] font-light leading-relaxed text-white/50" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                Deep market intelligence and direct relationships across major commodity houses, shipyards, and financial institutions allow us to execute at speed — without compromising on counterparty quality.
+              <p className="text-[16px] font-light leading-relaxed text-white/50">
+                Our approach combines commercial understanding with a practical, hands-on perspective, enabling us to identify opportunities and deliver value in dynamic market conditions. Through our market knowledge, industry network, and practical expertise, we support clients in navigating transactions and achieving strategic commercial objectives across the shipping sector.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Core Mandates — editorial list, not card grid */}
-        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-28">
+        {/* Values */}
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-28 border-b border-white/5">
           <div className="max-w-6xl mx-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-4 bg-crimson" />
+              <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">Our Values</p>
+            </div>
             <h2
-              className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-16"
-              style={{ textWrap: "balance" } as React.CSSProperties}
+              className="text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-16"
             >
               How We Operate
             </h2>
@@ -92,16 +105,16 @@ export default function AboutPage() {
             <div className="flex flex-col divide-y divide-white/8">
               {[
                 {
-                  title: "Trust & Partnerships",
-                  desc: "Enduring, institutional-grade partnerships built on transparency, strict compliance, and mutual reliability. Our network extends across top-tier charterers, shipyards, and financial institutions with long-term horizons.",
+                  title: "Trust, Transparency & Collaboration",
+                  desc: "We work closely with our clients and business partners to fully understand their operational and commercial goals, enabling us to deliver tailored solutions that support both immediate requirements and long-term success. Whether through voyage and time charter services, asset transactions, or strategic advisory support, our focus remains firmly centred on creating value and building sustainable relationships.",
                 },
                 {
-                  title: "Safety & Quality",
-                  desc: "A zero-tolerance approach to operational risk. Rigorous safety protocols and fleet maintenance to the highest classification society standards — ISM, ISPS, and MLC 2006 — protect crew, cargo, and commercial reputation equally.",
+                  title: "Health, Safety, Quality & Environment",
+                  desc: "Our business is guided by a strong commitment to health, safety, quality, and environmental responsibility. These principles form the foundation of our operations and decision-making processes across every aspect of the company. We maintain clear policies, operational standards, and compliance procedures designed to promote safe working practices, operational excellence, and responsible environmental stewardship.",
                 },
                 {
-                  title: "Sustainability",
-                  desc: "Active integration of energy-saving technologies and strict compliance with international maritime regulations. We reduce emissions fleet-wide and structure our newbuild programme around IMO 2030 carbon intensity targets.",
+                  title: "Sustainability & Corporate Responsibility",
+                  desc: "Range Shipping recognises the growing importance of sustainability and corporate responsibility within the maritime industry. We continuously strive to reduce environmental impact, improve operational efficiency, and work with partners who share our commitment to responsible business practices. By maintaining transparency and accountability in the way we operate, we aim to meet the expectations of our clients, stakeholders, and the wider industry.",
                 },
               ].map((item, i) => (
                 <div
@@ -117,10 +130,46 @@ export default function AboutPage() {
                     </h3>
                   </div>
                   <div className="md:col-span-7">
-                    <p className="text-[15px] font-light leading-relaxed text-white/55" style={{ textWrap: "pretty" } as React.CSSProperties}>
+                    <p className="text-base font-light leading-relaxed text-white/55">
                       {item.desc}
                     </p>
                   </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Address */}
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-4 bg-crimson" />
+                <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">Location</p>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-8">
+                London, Mayfair
+              </h2>
+              <address className="not-italic text-[16px] font-light leading-relaxed text-white/60">
+                19 Berkeley Street, 4th Floor<br />
+                Mayfair, London<br />
+                W1J 8ED<br />
+                United Kingdom
+              </address>
+              <div className="mt-8 flex flex-col gap-2 text-[14px] font-light text-white/50">
+                <span>T: +44 2045 703520</span>
+                <span>E: info@rangeshipping.com</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-1 h-4 bg-crimson" />
+                <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">Memberships</p>
+              </div>
+              {["UK Chamber of Shipping", "Baltic Exchange", "BIMCO"].map((m) => (
+                <div key={m} className="border border-white/8 px-5 py-4">
+                  <span className="text-[15px] font-medium text-white/75">{m}</span>
                 </div>
               ))}
             </div>

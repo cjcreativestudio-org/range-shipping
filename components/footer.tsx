@@ -26,32 +26,40 @@ export default function Footer() {
             <p className="text-[11px] font-medium tracking-widest uppercase text-white/30 mb-1">
               Legal
             </p>
-            {["Terms of service", "Privacy policy", "Cookie policy"].map((item) => (
+            {[
+              { label: "Terms of service", href: "/terms-of-service" },
+              { label: "Privacy policy", href: "/privacy-policy" },
+              { label: "Cookie policy", href: "/cookie-policy" },
+            ].map((item) => (
               <a
-                key={item}
-                href="#"
-                className="text-[13px] font-light text-white/55 hover:text-crimson transition-colors duration-200"
+                key={item.label}
+                href={item.href}
+                className="text-[13px] font-light text-white/55 hover:text-white transition-colors duration-200"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>
 
-          {/* Contact */}
-          <div className="flex flex-col gap-3">
-            <p className="text-[11px] font-medium tracking-widest uppercase text-white/30 mb-1">
-              Contact
+          {/* Follow */}
+          <div className="flex flex-col gap-4">
+            <p className="text-[11px] font-medium tracking-widest uppercase text-white/30">
+              Follow
             </p>
-            {["Contact support", "Global offices", "Media enquiries", "Investor relations"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="text-[13px] font-light text-white/55 hover:text-crimson transition-colors duration-200"
-              >
-                {item}
-              </a>
-            ))}
+            <a
+              href="https://www.linkedin.com/company/range-shipping-ltd/posts/?feedView=all"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Range Shipping on LinkedIn"
+              className="inline-flex items-center gap-3 px-4 py-3 border border-white/15 hover:border-white/35 hover:bg-white/5 transition-all duration-200 group w-fit"
+            >
+              <LinkedinLogo size={22} weight="fill" className="text-white/70 group-hover:text-white transition-colors duration-200" />
+              <span className="text-[13px] font-light text-white/55 group-hover:text-white transition-colors duration-200 tracking-wide">
+                LinkedIn
+              </span>
+            </a>
           </div>
+
         </div>
 
         {/* Bottom bar */}
@@ -59,16 +67,9 @@ export default function Footer() {
           <p className="text-[11px] font-light text-white/35">
             © 2026 Range Shipping. All rights reserved. Reg: 098421-M
           </p>
-          <div className="flex items-center gap-6">
-            <span className="text-[11px] font-light text-white/25">
-              VAT: GB 123 456 789
-            </span>
-            <div className="flex gap-4">
-              <a href="#" aria-label="LinkedIn" className="text-white/30 hover:text-crimson transition-colors">
-                <LinkedinLogo size={16} weight="fill" />
-              </a>
-            </div>
-          </div>
+          <span className="text-[11px] font-light text-white/25">
+            VAT: GB 123 456 789
+          </span>
         </div>
       </div>
     </footer>

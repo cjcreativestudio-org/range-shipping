@@ -6,7 +6,7 @@ export default function Corporate() {
         {/* Header — vertical stack */}
         <div className="max-w-3xl mb-20">
           <h2
-            className="font-condensed text-5xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight mb-8"
+            className="text-5xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight mb-8"
             style={{ textWrap: "balance" } as React.CSSProperties}
           >
             Institutional<br />Stability
@@ -14,7 +14,7 @@ export default function Corporate() {
           <p className="text-[17px] font-light leading-relaxed text-white/65 mb-4" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Range Shipping operates at the intersection of heavy maritime industry and institutional finance. Fleet management is structured around functional clarity and risk mitigation: we remove the variables that lose money, and protect the ones that make it.
           </p>
-          <p className="text-[15px] font-light leading-relaxed text-white/50" style={{ textWrap: "pretty" } as React.CSSProperties}>
+          <p className="text-base font-light leading-relaxed text-white/50" style={{ textWrap: "pretty" } as React.CSSProperties}>
             Unyielding reliability in a volatile global market. Our focus remains on delivering high-stakes information and assets without distraction.
           </p>
         </div>

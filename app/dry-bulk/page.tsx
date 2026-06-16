@@ -9,24 +9,27 @@ export const metadata: Metadata = {
 
 const capabilities = [
   {
-    title: "Risk Management & Safety",
-    body: "Institutional safety protocols govern every fixture. We maintain absolute compliance with international maritime regulations and employ predictive modelling to identify operational hazards before they materialise. Vessel vetting, port risk assessments, and P&I cover are reviewed on every voyage.",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDG3kIrVVaLcOalq_aFw_F_UB5ljNgYZGZ1nVwtm39uOSSDsMNIUYi7JVLxSWUDmvwr03f7bM3gcYB_kgfBZDOo1ah6BtUq4Iy4ev9Hk8ZjOBgrNyEEa7fvI7K0k3KFD-TWAYxp2wFWCREWCJHA1xogANWAJZb2mZbf8JKwbNUbBmT5ttbkyQMDIXSwf1I3rx_Tx50DireMTKFMqbGIxgpRkdQ_P63f3kGaq14CthlzTRgEGPH-yRfHvqFwXW4Iqg2EFmvt7TU5G34",
-    alt: "Industrial cargo ship deck at sea, heavy steel structures and cables",
+    n: "01",
+    title: "Safety & Risk Management",
+    body: "The dry-bulk shipping industry presents complex and constantly changing challenges. Range Shipping actively works to minimise operational and commercial risks through careful planning, market analysis, and the use of advanced tools and strategies. Our proactive approach allows us to provide reliable freight solutions while protecting the interests of our clients and partners.",
+    img: "/vessels/xin-qi-hang-1.png",
+    alt: "Bulk carrier vessel at sea",
     imgLeft: false,
   },
   {
+    n: "02",
     title: "Transparency & Competitiveness",
-    body: "Real-time market analytics secure competitive freight rates while maintaining full transparency with our principals. Voyage tracking, operational ledgers, and fixture economics are accessible throughout the cargo's lifecycle — no black boxes, no surprises at settlement.",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCevKXHLPGqYSliAoahqCl8eTKsvGsi5B1dqcRAFTQyeHkEjYDWLIDmUw1qgkluzADwuf1ByZ9ZcJsr1eAcP_nfVGGoqaJJmMDQBaiwcgPSu20aY0eWEKK-7Fn-SKGmt0hKgFHv6nHhCZfVzdi3UoxRHvYmkKCM4R2DnHhU-ykThLl0Sr4UWG76dJ7O5t9IfquRGrW4ygyCD7914xjkL2PGE6EF3q2KoxTjeXk4Lf6ukEYH6--W9-dsovFVEflc3QRaET2A9iI0cwE",
-    alt: "Maritime operations command centre with global tracking displays",
+    body: "Transparency and competitiveness are fundamental to the way we conduct business. We believe that strong partnerships are built on trust and open communication, which is why we maintain clear pricing structures, transparent contractual terms, and straightforward commercial processes. This approach gives our clients confidence that they are receiving fair, competitive, and commercially sound freight services.",
+    img: "/vessels/ocean-azalea.png",
+    alt: "Range Shipping vessel Ocean Azalea",
     imgLeft: true,
   },
   {
+    n: "03",
     title: "Technological Innovation",
-    body: "AI-driven routing algorithms optimise fuel consumption and minimise transit times on every voyage. Our digital infrastructure automates voyage monitoring, laytime calculations, and communications — reducing administrative friction and increasing accountability across the fixture lifecycle.",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDSEGrpgSFW97B-uTME5_kQRC9-YmiqEmT1xkIbCncYv46DWwL39yk3bawwMhD9m-HjElQto6ZzfJ7oN2nMcqoFchewKNqerYD1LnrR1jQ_KdGpvvLcPmr6jtMJaNOlo1dmlEJDJjc4AZFuLrwiy5Fn8yqJ4S8zTi5LCZaOPi6TJ50Jv3M9BFRYpjQ87cypIVwz86BJoiQMP7YhR0Yz8VCuohPzymC_EXTAFHVu7g-bcLeVv3EnhFC8TsASbfJ6N39Bjt59u1nCEVM",
-    alt: "Digital interface with data visualisations and network graphs",
+    body: "As part of our commitment to continuous improvement and service excellence, we embrace technological innovation across our operations. The integration of digital platforms, real-time tracking systems, and modern communication tools enhances operational efficiency, improves visibility, and provides clients with greater transparency and control throughout the transportation process.",
+    img: "/vessels/bbg-leader.png",
+    alt: "Range Shipping vessel BBG Leader",
     imgLeft: false,
   },
 ];
@@ -40,33 +43,39 @@ export default function DryBulkPage() {
         {/* Hero */}
         <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
           <div className="max-w-6xl mx-auto">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-1 h-4 bg-crimson" />
+              <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">Services</p>
+            </div>
             <h1
-              className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-3xl"
-              style={{ textWrap: "balance" } as React.CSSProperties}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-3xl"
             >
               Dry-Bulk<br />Chartering
             </h1>
-            <p className="text-[18px] font-light leading-relaxed text-white/65 max-w-xl" style={{ textWrap: "pretty" } as React.CSSProperties}>
+            <p className="text-[18px] font-light leading-relaxed text-white/65 max-w-xl">
               Safe, reliable, and competitive freight services across Supramax and Panamax sectors on major global trade routes.
             </p>
           </div>
         </section>
 
-        {/* Service overview */}
+        {/* Service Overview */}
         <section className="bg-[#001f3f] px-6 md:px-12 py-24 border-b border-white/5">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1 h-4 bg-crimson" />
+                <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">Service Overview</p>
+              </div>
               <h2
-                className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-8"
-                style={{ textWrap: "balance" } as React.CSSProperties}
+                className="text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-8"
               >
-                Service Overview
+                Comprehensive<br />Chartering Solutions
               </h2>
-              <p className="text-[17px] font-light leading-relaxed text-white/65 mb-4" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                Range Shipping operates a versatile fleet of modern dry-bulk carriers in the Supramax and Panamax segments. We provide comprehensive maritime logistics across major global trade routes — coal and iron ore from Australia and Brazil, grain from the Black Sea and US Gulf, bauxite and fertilisers across the Atlantic and Pacific.
+              <p className="text-[17px] font-light leading-relaxed text-white/65 mb-4">
+                Range Shipping provides comprehensive dry-bulk chartering solutions designed to meet the evolving transportation requirements of clients across global commodity markets. With extensive experience in the Supramax and Panamax sectors, we manage the worldwide movement of a diverse range of dry-bulk cargoes, delivering flexible and dependable freight solutions tailored to individual client needs.
               </p>
-              <p className="text-[16px] font-light leading-relaxed text-white/55" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                Chartering operations are underpinned by rigorous data analysis, strategic market positioning, and an operational culture that treats cargo safety as the constraint that shapes every other decision.
+              <p className="text-[16px] font-light leading-relaxed text-white/55">
+                Our global network and strong industry relationships enable us to offer customised and efficient shipping services across major international trade routes. By combining market intelligence with operational expertise, we are able to respond quickly to changing market conditions while maintaining a high standard of service, reliability, and commercial performance.
               </p>
             </div>
             <div className="lg:col-span-4 flex flex-col divide-y divide-white/8">
@@ -75,49 +84,48 @@ export default function DryBulkPage() {
                 <p className="text-[17px] font-semibold text-white/85">Supramax &amp; Panamax</p>
               </div>
               <div className="py-6">
-                <p className="text-[11px] font-medium tracking-widest uppercase text-white/35 mb-2">Market scope</p>
-                <p className="text-[17px] font-semibold text-white/85">Global trade routes</p>
+                <p className="text-[11px] font-medium tracking-widest uppercase text-white/35 mb-2">Charter types</p>
+                <p className="text-[17px] font-semibold text-white/85">Voyage &amp; Time Charter</p>
               </div>
               <div className="pt-6">
-                <p className="text-[11px] font-medium tracking-widest uppercase text-white/35 mb-2">Operation type</p>
+                <p className="text-[11px] font-medium tracking-widest uppercase text-white/35 mb-2">Operation basis</p>
                 <p className="text-[17px] font-semibold text-white/85">Principal basis only</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Capabilities zig-zag */}
+        {/* Capabilities */}
         <section className="bg-[#001f3f] px-6 md:px-12 py-24 border-b border-white/5">
           <div className="max-w-6xl mx-auto flex flex-col gap-20 md:gap-28">
-            {capabilities.map((cap, i) => (
+            {capabilities.map((cap) => (
               <div
                 key={cap.title}
                 className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"
               >
-                {/* Text — swaps order on desktop based on imgLeft */}
                 <div className={`flex flex-col gap-5 ${cap.imgLeft ? "md:order-2" : "md:order-1"}`}>
                   <div className="flex items-baseline gap-4">
-                    <span className="text-xs font-medium text-white/25 tabular-nums mt-0.5">0{i + 1}</span>
-                    <h3
-                      className="font-condensed text-3xl md:text-4xl font-bold text-white leading-[1.05] tracking-tight"
-                      style={{ textWrap: "balance" } as React.CSSProperties}
-                    >
-                      {cap.title}
-                    </h3>
+                    <span className="text-xs font-medium text-white/25 tabular-nums mt-0.5">{cap.n}</span>
+                    <div className="flex items-center gap-3">
+                      <div className="w-1 h-4 bg-crimson shrink-0" />
+                      <h3
+                        className="text-3xl md:text-4xl font-bold text-white leading-[1.05] tracking-tight"
+                      >
+                        {cap.title}
+                      </h3>
+                    </div>
                   </div>
-                  <p className="text-[15px] font-light leading-relaxed text-white/60" style={{ textWrap: "pretty" } as React.CSSProperties}>
+                  <p className="text-base font-light leading-relaxed text-white/60">
                     {cap.body}
                   </p>
                 </div>
-
-                {/* Image */}
                 <div className={`relative aspect-video overflow-hidden ${cap.imgLeft ? "md:order-1" : "md:order-2"}`}>
-                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-white/10 z-10" />
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-crimson/30 z-10" />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={cap.img}
                     alt={cap.alt}
-                    className="w-full h-full object-cover grayscale opacity-75"
+                    className="w-full h-full object-cover opacity-90 saturate-[0.6]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#001f3f]/40 to-transparent" />
                 </div>
@@ -130,23 +138,32 @@ export default function DryBulkPage() {
         <section className="bg-[#001f3f] px-6 md:px-12 py-24">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
             <div className="max-w-xl">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-1 h-4 bg-crimson" />
+                <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">Inquire</p>
+              </div>
               <h2
-                className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-4"
-                style={{ textWrap: "balance" } as React.CSSProperties}
+                className="text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-4"
               >
-                Inquire About Our Latest Fleet Position
+                Latest Fleet Position<br />&amp; Fixture List
               </h2>
               <p className="text-[16px] font-light text-white/55">
-                Access real-time availability and discuss competitive freight solutions with our chartering team.
+                For our latest fleet position and fixture list, we welcome your enquiries.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-              <button className="px-8 py-3.5 bg-crimson text-white text-[12px] font-semibold tracking-[0.12em] uppercase hover:bg-crimson/85 transition-colors duration-200 whitespace-nowrap">
+              <a
+                href="/contact"
+                className="px-8 py-3.5 bg-crimson text-white text-[12px] font-semibold tracking-[0.12em] uppercase hover:bg-crimson/85 transition-colors duration-200 whitespace-nowrap"
+              >
                 Contact chartering team
-              </button>
-              <button className="px-8 py-3.5 border border-white/25 text-[12px] font-medium tracking-[0.12em] uppercase text-white/70 hover:border-white/50 hover:text-white transition-all duration-200 whitespace-nowrap">
-                Download fleet specs
-              </button>
+              </a>
+              <a
+                href="/corporate-overview"
+                className="px-8 py-3.5 border border-white/25 text-[12px] font-medium tracking-[0.12em] uppercase text-white/70 hover:border-white/50 hover:text-white transition-all duration-200 whitespace-nowrap"
+              >
+                View fixture list
+              </a>
             </div>
           </div>
         </section>

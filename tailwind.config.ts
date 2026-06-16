@@ -10,7 +10,7 @@ const config: Config = {
       colors: {
         "deep-navy": "#000613",
         "crimson": "#bc0007",
-        "marine-blue": "#2f87ed",
+        "marine-blue": "#0074D9",
         "steel-grey": "#50606F",
         "glass-white": "rgba(255,255,255,0.05)",
       },

@@ -2,19 +2,15 @@
 
 import { useRef, useEffect, useState } from "react";
 import { getLenis } from "@/lib/lenis";
-import { DotPattern } from "@/components/ui/DotPattern";
 
 const EASE_OUT_QUART = "cubic-bezier(0.165, 0.84, 0.44, 1)";
 
-// Card dimensions (vh units) — drives the stacking math
-const CARD_H = 28; // card height in vh
-const CARD_GAP = 2; // gap between stacked cards in vh
-const STEP = CARD_H + CARD_GAP; // 30vh per card slot
+const CARD_H = 28;
+const CARD_GAP = 2;
+const STEP = CARD_H + CARD_GAP;
 
-// The animation completes at 75% of the total scroll, leaving 25% as dwell
-// time where all 3 cards stay visible before the section scrolls away.
 const ANIM_END = 0.75;
-const PHASE = ANIM_END / 3; // each card occupies 25% of total scroll
+const PHASE = ANIM_END / 3;
 
 const SERVICES = [
   {
@@ -45,6 +41,7 @@ function easeOutQuart(t: number) {
 export default function Operations() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [bannerParallax, setBannerParallax] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -64,6 +61,8 @@ export default function Operations() {
       const vh = window.innerHeight;
       const raw = (window.scrollY - sectionTop) / (sectionHeight - vh);
       setProgress(clamp01(raw));
+      const bannerRaw = (window.scrollY - (sectionTop - 2 * vh)) / (sectionHeight + 2 * vh);
+      setBannerParallax(clamp01(bannerRaw));
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -80,84 +79,81 @@ export default function Operations() {
     };
   }, []);
 
-  // Which card is currently entering (for the progress dash indicator)
   const activeIndex = Math.min(Math.floor((progress / ANIM_END) * 3), 2);
 
   return (
     <div ref={containerRef} className="relative min-h-[300vh] bg-[#001f3f] border-t border-white/5">
-      <div className="sticky top-0 h-screen flex overflow-hidden">
+      <div className="sticky top-0 h-screen flex overflow-hidden relative">
+
+        {/* Full-section parallax background image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/dry-bulk-bg.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 w-full pointer-events-none select-none z-0"
+          style={{
+            height: "120%",
+            objectFit: "cover",
+            objectPosition: "center center",
+            transform: `translateY(${bannerParallax * -17}%)`,
+            willChange: "transform",
+          }}
+        />
+        {/* Dark overlay for legibility */}
+        <div className="absolute inset-0 bg-[#001f3f]/45 pointer-events-none z-0" />
 
         {/* Left column — heading + meta */}
-        <div className="w-1/2 relative flex flex-col justify-center px-8 md:px-12 lg:px-16 border-r border-white/5 overflow-hidden">
-          {/* Background ship image */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/bulk-carrier.png"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-80 pointer-events-none select-none"
-          />
-          {/* Subtle overlay to keep text legible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f]/60 via-[#001f3f]/30 to-transparent pointer-events-none" />
-          <div className="relative z-10 flex flex-col">
-          <h2
-            className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.0] tracking-tight mb-8"
-            style={{ textWrap: "balance" } as React.CSSProperties}
-          >
-            Fully<br />Integrated<br />Dry Bulk<br />Operators
-          </h2>
-          <p
-            className="text-[15px] font-light leading-relaxed text-white/65 max-w-xs mb-10"
-            style={{ textWrap: "pretty" } as React.CSSProperties}
-          >
-            From vessel acquisition to cargo delivery, Range Shipping manages the full chain.
-            Our fleet spans Handysize to Capesize; our network covers every major bulk trade lane.
-          </p>
-          <a
-            href="#"
-            className="inline-block text-sm font-medium text-white/60 border-b border-white/20 pb-0.5 hover:text-white hover:border-white/50 transition-colors duration-200 w-fit"
-          >
-            View fleet specifications
-          </a>
+        <div className="w-1/2 relative z-10 flex flex-col justify-center px-8 md:px-12 lg:px-16">
+          <div className="flex flex-col">
+            <h2
+              className="font-semibold text-white mb-8"
+              style={{ fontSize: "clamp(2.5rem, 4.5vw, 4.5rem)", lineHeight: 1.05, letterSpacing: "-0.02em", textWrap: "balance" } as React.CSSProperties}
+            >
+              Fully<br />Integrated<br />Dry Bulk<br />Operators
+            </h2>
+            <p
+              className="text-base font-light leading-relaxed text-white/65 max-w-xs mb-10"
+              style={{ textWrap: "pretty" } as React.CSSProperties}
+            >
+              From vessel acquisition to cargo delivery, Range Shipping manages the full chain.
+              Our fleet spans Handysize to Capesize; our network covers every major bulk trade lane.
+            </p>
+            <a
+              href="#"
+              className="inline-block text-sm font-medium text-white/60 border-b border-white/20 pb-0.5 hover:text-white hover:border-white/50 transition-colors duration-200 w-fit"
+            >
+              View fleet specifications
+            </a>
 
-          {/* Progress dashes */}
-          <div className="flex gap-2 mt-14">
-            {SERVICES.map((_, i) => (
-              <div
-                key={i}
-                className="h-[1px]"
-                style={{
-                  width: activeIndex === i ? "36px" : "10px",
-                  backgroundColor:
-                    activeIndex === i ? "rgba(255,255,255,0.7)" : "rgba(255,255,255,0.15)",
-                  transition: reducedMotion
-                    ? "none"
-                    : `width 0.4s ${EASE_OUT_QUART}, background-color 0.4s ${EASE_OUT_QUART}`,
-                }}
-              />
-            ))}
-          </div>
+            {/* Progress dashes */}
+            <div className="flex gap-2 mt-14">
+              {SERVICES.map((_, i) => (
+                <div
+                  key={i}
+                  className="h-[1px]"
+                  style={{
+                    width: activeIndex === i ? "36px" : "10px",
+                    backgroundColor:
+                      activeIndex === i ? "#0074D9" : "rgba(255,255,255,0.15)",
+                    transition: reducedMotion
+                      ? "none"
+                      : `width 0.4s ${EASE_OUT_QUART}, background-color 0.4s ${EASE_OUT_QUART}`,
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Right column — stacked sequential card reveal */}
-        <div className="w-1/2 relative overflow-hidden bg-white">
+        <div className="w-1/2 relative z-10 overflow-hidden">
           {SERVICES.map((svc, i) => {
-            // Progress through this card's entry phase (0→1 as p goes from i*PHASE to (i+1)*PHASE)
             const entryP = clamp01((progress - i * PHASE) / PHASE);
             const eased = reducedMotion ? entryP : easeOutQuart(entryP);
 
-            // Final Y offset from the column's vertical center (vh units):
-            //   card 0 → above center by 1×STEP
-            //   card 1 → at center (0)
-            //   card 2 → below center by 1×STEP
-            // This centres the three-card group in the column.
             const finalY = (i - 1) * STEP;
-
-            // Cards enter from 80vh below center and animate to their final slot
             const currentY = 80 + (finalY - 80) * eased;
-
-            // Fade in during the first quarter of the entry phase
             const opacity = clamp01(eased / 0.25);
 
             return (
@@ -174,24 +170,16 @@ export default function Operations() {
                   willChange: "transform, opacity",
                 }}
               >
-                <div className="relative overflow-hidden bg-[#001f3f] border border-crimson/40 rounded h-full flex flex-col justify-center p-6 md:p-8">
-                  <DotPattern
-                    width={20}
-                    height={20}
-                    cx={1}
-                    cy={1}
-                    cr={0.45}
-                    className="fill-white/[0.04] md:fill-white/[0.06]"
-                  />
-                  <span className="relative z-10 text-[0.6rem] font-medium tracking-[0.4em] text-white/25 uppercase mb-4 block">
+                <div className="border border-[#0074D9]/25 h-full flex flex-col justify-center p-6 md:p-8">
+                  <span className="text-[0.55rem] tracking-[0.35em] text-white/25 uppercase mb-4 block">
                     {svc.n}
                   </span>
-                  <h3 className="relative z-10 text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight font-condensed">
+                  <h3 className="text-xl md:text-2xl font-semibold text-white/90 leading-snug mb-6">
                     {svc.title}
                   </h3>
-                  <div className="relative z-10 w-8 h-[1px] bg-crimson/50 mb-4" />
+                  <div className="w-8 h-[1px] bg-[#0074D9]/50 mb-6" />
                   <p
-                    className="relative z-10 text-sm md:text-base font-light leading-relaxed text-white/70"
+                    className="text-base font-light leading-relaxed text-white/55"
                     style={{ textWrap: "pretty" } as React.CSSProperties}
                   >
                     {svc.desc}

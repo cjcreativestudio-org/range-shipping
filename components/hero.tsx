@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { getLenis } from "@/lib/lenis";
 
@@ -58,10 +59,10 @@ const TEXT_SEQUENCE: TextBlock[] = [
     type: "stat",
     value: "47 yrs",
     label: "Continuous operation",
-    scrollIn: 0.90,
-    scrollPeak: 0.93,
-    scrollFade: 0.96,
-    scrollOut: 0.99,
+    scrollIn: 0.88,
+    scrollPeak: 0.92,
+    scrollFade: 0.97,
+    scrollOut: 1.0,
   },
 ];
 
@@ -206,7 +207,7 @@ export default function Hero() {
   const indicatorOpacity = clamp01(1 - scrollProgress / 0.05);
 
   return (
-    <section ref={sectionRef} className="relative h-[700vh] isolate">
+    <section ref={sectionRef} className="relative h-[1400vh] isolate">
       <div className="sticky top-0 h-screen overflow-hidden bg-[#001f3f]">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
@@ -276,15 +277,15 @@ export default function Hero() {
             transition: "none",
           }}
         >
-          <div className="text-center select-none">
-            <p className="text-[0.65rem] md:text-xs tracking-[0.4em] text-white/65 uppercase mb-4">
-              Global Maritime Logistics
-            </p>
-            <h1 className="font-condensed text-8xl md:text-[10rem] lg:text-[13rem] font-bold tracking-tight text-white uppercase leading-none">
-              Range
-              <br />
-              Shipping
-            </h1>
+          <div className="flex flex-col items-center select-none">
+            <Image
+              src="/logo.png"
+              alt="Range Shipping"
+              width={260}
+              height={260}
+              className="w-48 md:w-64 lg:w-72 h-auto drop-shadow-2xl"
+              priority
+            />
           </div>
         </div>
 
@@ -296,8 +297,8 @@ export default function Hero() {
           <span className="text-[0.55rem] tracking-[0.4em] text-white/55 uppercase">
             Scroll
           </span>
-          <div className="w-[1px] h-8 bg-crimson/25 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1/2 bg-crimson animate-slideDown" />
+          <div className="w-[1px] h-8 bg-[#0074D9]/25 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1/2 bg-[#0074D9] animate-slideDown" />
           </div>
         </div>
       </div>

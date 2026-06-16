@@ -18,17 +18,17 @@ const SECTIONS = [
   {
     num: "01",
     title: "Sustainable Governance",
-    body: "We embed sustainability into our corporate strategy, aligning our governance with the UN Sustainable Development Goals. Clearly defined environmental objectives guide every decision across the company.",
+    body: "Our approach begins with clearly defined sustainability objectives that guide decision-making across every area of the business. By integrating environmental responsibility into our corporate strategy, we ensure that sustainable practices remain a core part of our long-term vision and daily operations.",
   },
   {
     num: "02",
     title: "Stakeholder Collaboration",
-    body: "We foster open communication with employees, customers, suppliers, and investors — understanding their expectations and incorporating their feedback into our sustainability strategies.",
+    body: "We believe meaningful progress comes through collaboration. By engaging openly with employees, customers, suppliers, investors, and wider stakeholders, we listen to their expectations and incorporate valuable feedback into our sustainability initiatives.",
   },
   {
     num: "03",
     title: "Supply Chain Responsibility",
-    body: "We extend our commitment across the entire supply chain, working with partners who share our values and engaging with industry bodies to advocate for policies that drive positive change at scale.",
+    body: "Our commitment extends throughout our supply chain. We work closely with suppliers and partners who share our environmental values and who are equally dedicated to reducing the impact of products and services across their entire lifecycle.",
   },
 ];
 
@@ -111,8 +111,8 @@ export default function Sustainability() {
             Environmental Policy
           </p>
           <h2
-            className="relative z-10 font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.0] tracking-tight"
-            style={{ textWrap: "balance" } as React.CSSProperties}
+            className="relative z-10 font-bold text-white"
+            style={{ fontSize: "clamp(2.5rem, 4.5vw, 4.5rem)", lineHeight: 1.05, letterSpacing: "-0.02em", textWrap: "balance" } as React.CSSProperties}
           >
             Low Environmental
             <br />
@@ -163,9 +163,9 @@ export default function Sustainability() {
                   <h3 className="text-xl md:text-2xl font-semibold text-white/90 leading-snug mb-6">
                     {section.title}
                   </h3>
-                  <div className="w-8 h-[1px] bg-white/15 mb-6" />
+                  <div className="w-8 h-[1px] bg-[#0074D9]/50 mb-6" />
                   <p
-                    className="text-[15px] font-light leading-relaxed text-white/55"
+                    className="text-base font-light leading-relaxed text-white/55"
                     style={{ textWrap: "pretty" } as React.CSSProperties}
                   >
                     {section.body}
@@ -185,7 +185,7 @@ export default function Sustainability() {
               style={{
                 width: activeIndex === i ? "32px" : "10px",
                 backgroundColor:
-                  activeIndex === i ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.15)",
+                  activeIndex === i ? "#0074D9" : "rgba(255,255,255,0.15)",
                 transition: reducedMotion
                   ? "none"
                   : `width 0.4s ${EASE_OUT_QUART}, background-color 0.4s ${EASE_OUT_QUART}`,
