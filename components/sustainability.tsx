@@ -63,8 +63,8 @@ export default function Sustainability() {
       const vh = window.innerHeight;
       const raw = (window.scrollY - sectionTop) / (sectionHeight - vh);
       setProgress(clamp01(raw));
-      // Banner parallax starts as soon as the section enters the viewport bottom
-      const bannerRaw = (window.scrollY - (sectionTop - vh)) / (sectionHeight + vh);
+      // Banner parallax starts 2 viewports before the section enters
+      const bannerRaw = (window.scrollY - (sectionTop - 2 * vh)) / (sectionHeight + 2 * vh);
       setBannerParallax(clamp01(bannerRaw));
     };
 
@@ -98,10 +98,10 @@ export default function Sustainability() {
             aria-hidden="true"
             className="absolute inset-x-0 top-0 w-full opacity-80 pointer-events-none select-none"
             style={{
-              height: "130%",
+              height: "200%",
               objectFit: "cover",
               objectPosition: "center top",
-              transform: `translateY(${bannerParallax * -23}%)`,
+              transform: `translateY(${bannerParallax * -50}%)`,
               willChange: "transform",
             }}
           />
