@@ -1,5 +1,6 @@
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import DryBulkParallaxSection from "@/components/dry-bulk-parallax-section";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -94,6 +95,9 @@ export default function DryBulkPage() {
             </div>
           </div>
         </section>
+
+        {/* Parallax photo transition */}
+        <DryBulkParallaxSection />
 
         {/* Capabilities */}
         <section className="bg-[#001f3f] px-6 md:px-12 py-24 border-b border-white/5">
