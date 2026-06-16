@@ -43,6 +43,7 @@ function easeOutQuart(t: number) {
 export default function Sustainability() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [bannerParallax, setBannerParallax] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -62,6 +63,9 @@ export default function Sustainability() {
       const vh = window.innerHeight;
       const raw = (window.scrollY - sectionTop) / (sectionHeight - vh);
       setProgress(clamp01(raw));
+      // Banner parallax starts as soon as the section enters the viewport bottom
+      const bannerRaw = (window.scrollY - (sectionTop - vh)) / (sectionHeight + vh);
+      setBannerParallax(clamp01(bannerRaw));
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -97,7 +101,7 @@ export default function Sustainability() {
               height: "130%",
               objectFit: "cover",
               objectPosition: "center top",
-              transform: `translateY(${progress * -23}%)`,
+              transform: `translateY(${bannerParallax * -23}%)`,
               willChange: "transform",
             }}
           />
