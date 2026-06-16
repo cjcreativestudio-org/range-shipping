@@ -1,72 +1,139 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
+import { getLenis } from "@/lib/lenis";
+
+const SECTIONS = [
+  {
+    num: "01",
+    title: "Sustainable Governance",
+    body: "We embed sustainability into our corporate strategy, aligning our governance with the UN Sustainable Development Goals. Clearly defined environmental objectives guide every decision across the company.",
+  },
+  {
+    num: "02",
+    title: "Stakeholder Collaboration",
+    body: "We foster open communication with employees, customers, suppliers, and investors — understanding their expectations and incorporating their feedback into our sustainability strategies.",
+  },
+  {
+    num: "03",
+    title: "Supply Chain Responsibility",
+    body: "We extend our commitment across the entire supply chain, working with partners who share our values and engaging with industry bodies to advocate for policies that drive positive change at scale.",
+  },
+];
+
+function clamp01(v: number) {
+  return Math.max(0, Math.min(1, v));
+}
+
 export default function Sustainability() {
-  const goals = [
-    {
-      code: "SDG 13",
-      title: "Climate Action",
-      desc: "Optimised routing and hybrid propulsion across the Panamax fleet, reducing carbon intensity by 40% against the 2008 IMO baseline.",
-    },
-    {
-      code: "SDG 14",
-      title: "Life Below Water",
-      desc: "Ballast water treatment systems fitted fleet-wide, meeting D-2 biological standards and eliminating invasive species transfer across trade lanes.",
-    },
-    {
-      code: "SDG 09",
-      title: "Industry & Innovation",
-      desc: "Investment in AI-assisted voyage optimisation and novel hull forms developed for the 2026 newbuild programme.",
-    },
-  ];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = containerRef.current;
+      if (!el) return;
+      const sectionTop = el.getBoundingClientRect().top + window.scrollY;
+      const sectionHeight = el.offsetHeight;
+      const vh = window.innerHeight;
+      const raw = (window.scrollY - sectionTop) / (sectionHeight - vh);
+      const p = clamp01(raw);
+      setActiveIndex(Math.min(Math.floor(p * 3), 2));
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    const lenis = getLenis();
+    let cleanup: (() => void) | null = null;
+    if (lenis) {
+      lenis.on("scroll", handleScroll);
+      cleanup = () => lenis.off("scroll", handleScroll);
+    }
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cleanup?.();
+    };
+  }, []);
 
   return (
-    <section className="relative bg-[#001f3f] px-6 md:px-12 py-28 md:py-36 border-t border-white/5">
-      <div className="max-w-6xl mx-auto">
+    <div ref={containerRef} className="relative min-h-[350vh] bg-[#001f3f] border-t border-white/5">
+      <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
 
-        {/* Top: full-width commitment statement + compliance note in a row */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+        {/* Centered heading */}
+        <div className="flex-none pt-16 pb-10 px-6 text-center">
+          <p className="text-[0.55rem] tracking-[0.45em] text-white/30 uppercase mb-5">
+            Environmental Policy
+          </p>
           <h2
-            className="font-condensed text-5xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight max-w-lg"
+            className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.0] tracking-tight"
             style={{ textWrap: "balance" } as React.CSSProperties}
           >
-            Low<br />Environmental<br />Impact
+            Low Environmental
+            <br />
+            Impact
           </h2>
-          <div className="md:max-w-sm">
-            <p className="text-[15px] font-light leading-relaxed text-white/65 mb-4" style={{ textWrap: "pretty" } as React.CSSProperties}>
-              The oceans we operate on are the oceans we are obligated to protect. Range Shipping aligns its fleet programme with the IMO 2030 carbon intensity targets and the UN Sustainable Development Goals.
-            </p>
-            <p className="text-[13px] font-medium text-white/45">
-              IMO 2030 compliant across active fleet. Net zero target 2050.
-            </p>
+          <p className="text-[14px] font-light text-white/45 mt-5 max-w-md mx-auto leading-relaxed">
+            IMO 2030 compliant across active fleet. Net zero target 2050.
+          </p>
+        </div>
+
+        {/* Scroll-driven section cards */}
+        <div className="flex-1 flex items-center justify-center relative px-6">
+          {SECTIONS.map((section, i) => {
+            const isActive = activeIndex === i;
+            const isPast = activeIndex > i;
+            return (
+              <div
+                key={i}
+                className="absolute max-w-2xl w-full"
+                style={{
+                  opacity: isActive ? 1 : 0,
+                  transform: isActive
+                    ? "translateY(0px) scale(1)"
+                    : isPast
+                    ? "translateY(-44px) scale(0.97)"
+                    : "translateY(44px) scale(0.97)",
+                  transition: "opacity 0.7s ease, transform 0.7s ease",
+                  pointerEvents: isActive ? "auto" : "none",
+                }}
+              >
+                <div className="border border-white/10 p-8 md:p-12">
+                  <div className="flex items-start gap-6 mb-6">
+                    <span className="text-[0.55rem] tracking-[0.35em] text-white/25 uppercase mt-1 shrink-0">
+                      {section.num}
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-semibold text-white/90 leading-snug">
+                      {section.title}
+                    </h3>
+                  </div>
+                  <p className="text-[15px] font-light leading-relaxed text-white/55 pl-10 border-t border-white/8 pt-6" style={{ textWrap: "pretty" } as React.CSSProperties}>
+                    {section.body}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Progress indicators */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 items-center">
+            {SECTIONS.map((_, i) => (
+              <div
+                key={i}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: activeIndex === i ? "28px" : "5px",
+                  height: "5px",
+                  backgroundColor:
+                    activeIndex === i
+                      ? "rgba(255,255,255,0.65)"
+                      : "rgba(255,255,255,0.15)",
+                }}
+              />
+            ))}
           </div>
         </div>
 
-        {/* SDG alignments — 3-column grid, distinct from Operations vertical list */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/8">
-          {goals.map((goal) => (
-            <div key={goal.code} className="bg-[#001f3f] p-8">
-              <p className="text-[10px] font-medium tracking-widest text-white/35 uppercase mb-5">
-                {goal.code}
-              </p>
-              <h3 className="text-[16px] font-semibold text-white/90 mb-3">
-                {goal.title}
-              </h3>
-              <p className="text-[13px] font-light leading-relaxed text-white/55" style={{ textWrap: "pretty" } as React.CSSProperties}>
-                {goal.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-10 pt-8 border-t border-white/8">
-          <a
-            href="#"
-            className="text-sm font-medium text-white/60 border-b border-white/20 pb-0.5 hover:text-crimson hover:border-crimson transition-colors duration-200"
-          >
-            Read the sustainability report
-          </a>
-        </div>
       </div>
-    </section>
+    </div>
   );
 }

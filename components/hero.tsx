@@ -7,32 +7,63 @@ import { getLenis } from "@/lib/lenis";
 const FRAME_COUNT = 120;
 const BASE_PATH = "/frames/";
 
-const TEXT_SEQUENCE = [
+type ScrollTiming = {
+  scrollIn: number;
+  scrollPeak: number;
+  scrollFade: number;
+  scrollOut: number;
+};
+
+type ParagraphBlock = ScrollTiming & { type: "paragraph"; text: string };
+type StatBlock = ScrollTiming & { type: "stat"; value: string; label: string };
+type TextBlock = ParagraphBlock | StatBlock;
+
+const TEXT_SEQUENCE: TextBlock[] = [
   {
-    lines: ["Connecting", "continents"],
-    sub: "End-to-end maritime freight solutions",
-    scrollIn: 0.08,
-    scrollPeak: 0.15,
-    scrollFade: 0.26,
-    scrollOut: 0.32,
+    type: "paragraph",
+    text: "In 2025, Range Shipping moved 2,973,854 metric tonnes of dry bulk cargo across 118 ports in 60 countries. The 47th year of continuous operation under single-ownership technical management.",
+    scrollIn: 0.03,
+    scrollPeak: 0.08,
+    scrollFade: 0.14,
+    scrollOut: 0.20,
   },
   {
-    lines: ["Precision", "at scale"],
-    sub: "1,200 voyages a year. 60 countries served.",
-    scrollIn: 0.37,
-    scrollPeak: 0.44,
-    scrollFade: 0.55,
-    scrollOut: 0.61,
+    type: "stat",
+    value: "1978",
+    label: "Year founded",
+    scrollIn: 0.25,
+    scrollPeak: 0.31,
+    scrollFade: 0.40,
+    scrollOut: 0.47,
   },
   {
-    lines: ["Built for what", "moves the world"],
-    sub: "Bulk carriers, specialised freight, and everything between",
-    scrollIn: 0.65,
-    scrollPeak: 0.70,
-    scrollFade: 0.76,
-    scrollOut: 0.80,
+    type: "stat",
+    value: "1,200+",
+    label: "Voyages per year",
+    scrollIn: 0.49,
+    scrollPeak: 0.54,
+    scrollFade: 0.62,
+    scrollOut: 0.68,
   },
-] as const;
+  {
+    type: "stat",
+    value: "60",
+    label: "Countries served",
+    scrollIn: 0.70,
+    scrollPeak: 0.75,
+    scrollFade: 0.83,
+    scrollOut: 0.88,
+  },
+  {
+    type: "stat",
+    value: "47 yrs",
+    label: "Continuous operation",
+    scrollIn: 0.90,
+    scrollPeak: 0.93,
+    scrollFade: 0.96,
+    scrollOut: 0.99,
+  },
+];
 
 function drawCover(ctx: CanvasRenderingContext2D, img: HTMLImageElement, w: number, h: number) {
   const imgAspect = img.naturalWidth / img.naturalHeight;
@@ -74,7 +105,7 @@ function clamp01(v: number): number {
   return Math.max(0, Math.min(1, v));
 }
 
-function textOpacity(p: number, block: typeof TEXT_SEQUENCE[number]): number {
+function textOpacity(p: number, block: ScrollTiming): number {
   if (p < block.scrollIn || p > block.scrollOut) return 0;
   if (p <= block.scrollPeak) return clamp01((p - block.scrollIn) / (block.scrollPeak - block.scrollIn));
   if (p <= block.scrollFade) return 1;
@@ -107,7 +138,6 @@ export default function Hero() {
   useEffect(() => {
     if (!loaded) return;
     if (reducedMotion) {
-      // Skip to last frame immediately; no animation loop
       exactIndexRef.current = FRAME_COUNT - 1;
       drawFrame();
       setScrollProgress(1);
@@ -168,14 +198,15 @@ export default function Hero() {
     return () => ro.disconnect();
   }, []);
 
-  const logoExitT = clamp01((scrollProgress - 0.80) / 0.20);
+  // Logo exits before the stat sequence to clear center stage
+  const logoExitT = clamp01((scrollProgress - 0.22) / 0.08);
   const logoOpacity = 1 - logoExitT;
   const logoTranslateY = -logoExitT * 40;
   const logoScale = 1 - logoExitT * 0.2;
-  const indicatorOpacity = clamp01(1 - scrollProgress / 0.08);
+  const indicatorOpacity = clamp01(1 - scrollProgress / 0.05);
 
   return (
-    <section ref={sectionRef} className="relative h-[600vh] isolate">
+    <section ref={sectionRef} className="relative h-[700vh] isolate">
       <div className="sticky top-0 h-screen overflow-hidden bg-[#001f3f]">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
@@ -203,30 +234,40 @@ export default function Hero() {
         {/* Sequential text overlays */}
         {TEXT_SEQUENCE.map((block, i) => {
           const opacity = textOpacity(scrollProgress, block);
-          const translateY = (1 - Math.min(opacity * 2, 1)) * 16;
+          const translateY = (1 - Math.min(opacity * 2, 1)) * 24;
           return (
             <div
               key={i}
-              className="absolute inset-0 flex flex-col items-center justify-end pb-32 pointer-events-none z-10"
+              className={`absolute inset-0 flex flex-col items-center pointer-events-none z-10 ${
+                block.type === "stat" ? "justify-center" : "justify-end pb-28"
+              }`}
               style={{
                 opacity,
                 transform: `translateY(${translateY}px)`,
                 transition: "none",
               }}
             >
-              <div className="text-center px-6">
-                <p className="text-base md:text-lg font-light tracking-[0.25em] text-white/90 uppercase leading-tight mb-3">
-                  {block.lines.join(" ")}
-                </p>
-                <p className="text-xs tracking-[0.2em] text-white/60 uppercase">
-                  {block.sub}
-                </p>
-              </div>
+              {block.type === "paragraph" ? (
+                <div className="text-center px-8 max-w-2xl mx-auto">
+                  <p className="text-base md:text-xl font-light leading-relaxed text-white/85 tracking-wide">
+                    {block.text}
+                  </p>
+                </div>
+              ) : (
+                <div className="text-center px-6">
+                  <p className="text-xs md:text-sm tracking-[0.35em] text-white/65 uppercase mb-5">
+                    {block.label}
+                  </p>
+                  <p className="text-7xl md:text-9xl font-semibold tracking-[0.06em] text-white uppercase leading-none">
+                    {block.value}
+                  </p>
+                </div>
+              )}
             </div>
           );
         })}
 
-        {/* Company logo */}
+        {/* Company logo — exits upward before stat sequence begins */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none z-20"
           style={{
@@ -236,10 +277,10 @@ export default function Hero() {
           }}
         >
           <div className="text-center select-none">
-            <p className="text-[0.6rem] md:text-[0.65rem] tracking-[0.45em] text-white/55 uppercase mb-4">
+            <p className="text-[0.65rem] md:text-xs tracking-[0.4em] text-white/65 uppercase mb-4">
               Global Maritime Logistics
             </p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-light tracking-[0.12em] text-white uppercase leading-none">
+            <h1 className="font-condensed text-8xl md:text-[10rem] lg:text-[13rem] font-bold tracking-tight text-white uppercase leading-none">
               Range
               <br />
               Shipping
