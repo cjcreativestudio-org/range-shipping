@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { getLenis } from "@/lib/lenis";
 
 const MEMBERSHIPS = [
   {
@@ -30,6 +31,9 @@ const MEMBERSHIPS = [
 ];
 
 type Membership = (typeof MEMBERSHIPS)[number];
+
+function clamp01(v: number) { return Math.max(0, Math.min(1, v)); }
+function easeOutQuart(t: number) { return 1 - Math.pow(1 - t, 4); }
 
 function Modal({ m, onClose }: { m: Membership; onClose: () => void }) {
   useEffect(() => {
@@ -73,83 +77,107 @@ function Modal({ m, onClose }: { m: Membership; onClose: () => void }) {
 
 export default function Memberships() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [selected, setSelected] = useState<Membership | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+    const handleScroll = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // 0 when section bottom enters viewport; 1 when section top reaches 30% from top
+      const raw = (vh - rect.top) / (rect.height + vh * 0.6);
+      setScrollProgress(clamp01(raw));
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    const lenis = getLenis();
+    let cleanup: (() => void) | null = null;
+    if (lenis) {
+      lenis.on("scroll", handleScroll);
+      cleanup = () => lenis.off("scroll", handleScroll);
+    }
+    handleScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cleanup?.();
+    };
   }, []);
+
+  // Each card animates in sequence: card i waits slightly longer
+  const cardStyle = (i: number) => {
+    const start = i * 0.12;
+    const p = easeOutQuart(clamp01((scrollProgress - start) / 0.5));
+    return {
+      opacity: p,
+      transform: `translateY(${(1 - p) * 72}px)`,
+      willChange: "transform, opacity" as const,
+    };
+  };
 
   return (
     <>
       <section
         ref={sectionRef}
         className="relative border-t border-black/5"
-        style={{ background: "linear-gradient(to bottom, #ffffff 50%, #0074D9 50%)" }}
+        style={{ background: "linear-gradient(to bottom, #ffffff 50%, #001f3f 50%)" }}
       >
         <div className="max-w-6xl mx-auto px-6 md:px-12 pt-10 pb-12">
 
-          {/* Compact horizontal header */}
-          <div className="flex items-baseline gap-6 md:gap-10 mb-8 flex-wrap">
-            <p className="text-[0.5rem] tracking-[0.45em] text-[#001f3f]/35 uppercase whitespace-nowrap">
-              Industry Memberships
-            </p>
+          {/* Header: heading LEFT, label RIGHT */}
+          <div className="flex items-baseline justify-between mb-8 gap-4">
             <h2
               className="font-bold text-[#001f3f]"
               style={{ fontSize: "clamp(1.4rem, 2.2vw, 2rem)", lineHeight: 1.1, letterSpacing: "-0.02em" }}
             >
               Recognised by Global Bodies
             </h2>
-            <p className="hidden md:block text-[12px] font-light text-[#001f3f]/40 leading-relaxed ml-auto">
-              Click any membership to learn more.
+            <p className="text-[0.5rem] tracking-[0.45em] text-[#001f3f]/35 uppercase whitespace-nowrap">
+              Industry Memberships
             </p>
           </div>
 
-          {/* Cards */}
+          {/* Cards — scroll-driven upward reveal with stagger */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {MEMBERSHIPS.map((m, i) => (
               <div
                 key={m.id}
                 className="group cursor-pointer"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? "translateY(0)" : "translateY(20px)",
-                  transition: `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`,
-                }}
+                style={cardStyle(i)}
                 onClick={() => setSelected(m)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => e.key === "Enter" && setSelected(m)}
                 aria-label={`Learn more about ${m.name}`}
               >
-                <div className="border border-black/8 bg-white h-full flex flex-col justify-between p-5 transition-all duration-300 group-hover:border-[#001f3f]/15 group-hover:shadow-[0_6px_24px_rgba(0,31,63,0.09)]">
+                {/* Inner card handles hover scale + glow independently of scroll transform */}
+                <div className="border border-black/8 bg-white h-full flex flex-col justify-between p-5 transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:border-[#0074D9]/30 group-hover:shadow-[0_0_0_1px_rgba(0,116,217,0.15),0_12px_40px_rgba(0,31,63,0.14),0_0_60px_rgba(0,116,217,0.06)]">
+
                   {/* Logo */}
                   <div className="h-16 flex items-center mb-4" style={{ background: "white" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={m.logo}
                       alt={m.name}
-                      className="max-h-full max-w-[140px] object-contain opacity-85 group-hover:opacity-100 transition-opacity duration-300"
+                      className="max-h-full max-w-[140px] object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: "white" }}
                     />
                   </div>
+
                   {/* Text */}
                   <div>
                     <h3 className="text-[14px] font-semibold text-[#001f3f] leading-snug mb-2">{m.name}</h3>
-                    <div className="w-5 h-[1px] bg-[#0074D9]/50 mb-3" />
+                    <div className="w-5 h-[1px] bg-[#0074D9]/50 mb-3 transition-all duration-300 group-hover:w-8 group-hover:bg-[#0074D9]/80" />
                     <p className="text-[12px] font-light leading-relaxed text-[#001f3f]/50 group-hover:text-[#001f3f]/70 transition-colors duration-300">
                       {m.tagline}
                     </p>
                   </div>
+
                   {/* Expand hint */}
                   <div className="flex items-center gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-[9px] tracking-[0.3em] text-[#001f3f]/35 uppercase">Learn more</span>
-                    <div className="flex-1 h-[1px] bg-black/10 max-w-[1.5rem]" />
+                    <span className="text-[9px] tracking-[0.3em] text-[#001f3f]/40 uppercase">Learn more</span>
+                    <div className="flex-1 h-[1px] bg-[#0074D9]/30 max-w-[1.5rem]" />
                   </div>
                 </div>
               </div>
