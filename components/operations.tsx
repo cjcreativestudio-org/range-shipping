@@ -174,7 +174,7 @@ export default function Operations() {
                   willChange: "transform, opacity",
                 }}
               >
-                <div className="relative overflow-hidden border border-crimson/40 rounded h-full flex flex-col justify-center p-6 md:p-8">
+                <div className="relative overflow-hidden bg-[#001f3f] border border-crimson/40 rounded h-full flex flex-col justify-center p-6 md:p-8">
                   <DotPattern
                     width={20}
                     height={20}
