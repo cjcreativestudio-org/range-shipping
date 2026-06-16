@@ -93,7 +93,7 @@ export default function Sustainability() {
           src="/sustainability-banner.png"
           alt=""
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 w-full opacity-80 pointer-events-none select-none z-0"
+          className="absolute inset-x-0 top-0 w-full opacity-50 pointer-events-none select-none z-0"
           style={{
             height: "200%",
             objectFit: "cover",

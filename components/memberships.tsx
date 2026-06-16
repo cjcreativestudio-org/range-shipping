@@ -82,7 +82,7 @@ function MemberCard({ m, style, onClick }: { m: (typeof MEMBERSHIPS)[number]; st
       <div className="border border-black/8 bg-white h-full flex flex-col justify-between p-5 transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:border-[#0074D9]/30 group-hover:shadow-[0_0_0_1px_rgba(0,116,217,0.15),0_12px_40px_rgba(0,31,63,0.14),0_0_60px_rgba(0,116,217,0.06)]">
         <div className="h-16 flex items-center mb-4" style={{ background: "white" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={m.logo} alt={m.name} className="max-h-full max-w-[140px] object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "white" }} />
+          <img src={m.logo} alt={m.name} className="max-h-full max-w-[140px] object-contain opacity-55 group-hover:opacity-90 transition-opacity duration-300" style={{ background: "white" }} />
         </div>
         <div>
           <h3 className="text-[14px] font-semibold text-[#001f3f] leading-snug mb-2">{m.name}</h3>

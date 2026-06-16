@@ -15,18 +15,18 @@ const PHASE = ANIM_END / 3;
 const SERVICES = [
   {
     n: "01",
-    title: "Technical Management",
-    desc: "In-house engineering and class-compliance maintenance across the full fleet lifecycle. Every vessel operated under owner's supervision, not delegated to third-party managers.",
+    title: "Dry-Bulk Chartering",
+    desc: "Comprehensive chartering solutions across the Supramax and Panamax sectors. Our global network and market intelligence enable customised freight services across major international trade routes, tailored to the specific operational and commercial requirements of each client.",
   },
   {
     n: "02",
-    title: "Commercial Operations",
-    desc: "Chartering across spot, time-charter, and voyage fixtures. Our commercial desk operates from London and Singapore, with direct relationships across the major commodity houses.",
+    title: "Risk & Operational Management",
+    desc: "Safety and risk management are at the core of every operation. Through careful market analysis, strategic planning, and advanced operational tools, we minimise commercial and logistical exposure while maintaining consistent standards of service, reliability, and execution.",
   },
   {
     n: "03",
-    title: "Sales & Purchase",
-    desc: "Vessel acquisition and disposal across primary and resale markets. We advise on fleet strategy and execute transactions for institutional owners, funds, and family offices.",
+    title: "Transparency & Technology",
+    desc: "Clear pricing structures, transparent contractual terms, and real-time tracking give clients full visibility throughout the transportation process. We integrate modern digital platforms and communication tools to enhance efficiency, accountability, and long-term partnership value.",
   },
 ];
 
@@ -91,7 +91,7 @@ export default function Operations() {
           src="/dry-bulk-bg.png"
           alt=""
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 w-full pointer-events-none select-none z-0"
+          className="absolute inset-x-0 top-0 w-full opacity-50 saturate-150 pointer-events-none select-none z-0"
           style={{
             height: "120%",
             objectFit: "cover",
@@ -116,8 +116,7 @@ export default function Operations() {
               className="text-base font-light leading-relaxed text-white/65 max-w-xs mb-10"
               style={{ textWrap: "pretty" } as React.CSSProperties}
             >
-              From vessel acquisition to cargo delivery, Range Shipping manages the full chain.
-              Our fleet spans Handysize to Capesize; our network covers every major bulk trade lane.
+              With extensive experience in the Supramax and Panamax sectors, Range Shipping delivers safe, reliable, and competitive freight solutions across global commodity markets.
             </p>
             <a
               href="#"
