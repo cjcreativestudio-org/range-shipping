@@ -95,7 +95,7 @@ export default function Operations() {
             src="/bulk-carrier.png"
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-50 pointer-events-none select-none"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-80 pointer-events-none select-none"
           />
           {/* Subtle overlay to keep text legible */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f]/60 via-[#001f3f]/30 to-transparent pointer-events-none" />
