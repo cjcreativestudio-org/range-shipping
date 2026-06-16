@@ -61,7 +61,7 @@ export default function Nav() {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-[11px] tracking-[0.1em] uppercase text-white/50 hover:text-crimson transition-colors duration-200"
+                className="text-[11px] tracking-[0.1em] uppercase text-white/50 hover:text-white transition-colors duration-200"
               >
                 {item.label}
               </a>
@@ -100,7 +100,7 @@ export default function Nav() {
               <a
                 key={item.label}
                 href={item.href}
-                className="text-[11px] tracking-[0.1em] uppercase text-white/60 hover:text-crimson transition-colors"
+                className="text-[11px] tracking-[0.1em] uppercase text-white/60 hover:text-white transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 {item.label}
