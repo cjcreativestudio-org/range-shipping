@@ -174,24 +174,24 @@ export default function Operations() {
                   willChange: "transform, opacity",
                 }}
               >
-                <div className="relative overflow-hidden border border-crimson/40 rounded h-full flex flex-col justify-center p-6 md:p-8">
+                <div className="relative overflow-hidden bg-white border border-white/20 rounded h-full flex flex-col justify-center p-6 md:p-8">
                   <DotPattern
                     width={20}
                     height={20}
                     cx={1}
                     cy={1}
                     cr={0.45}
-                    className="fill-white/[0.04] md:fill-white/[0.06]"
+                    className="fill-[#001f3f]/[0.04] md:fill-[#001f3f]/[0.06]"
                   />
-                  <span className="relative z-10 text-[0.6rem] font-medium tracking-[0.4em] text-white/25 uppercase mb-4 block">
+                  <span className="relative z-10 text-[0.6rem] font-medium tracking-[0.4em] text-[#001f3f]/30 uppercase mb-4 block">
                     {svc.n}
                   </span>
-                  <h3 className="relative z-10 text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight font-condensed">
+                  <h3 className="relative z-10 text-2xl md:text-3xl lg:text-4xl font-bold text-[#001f3f] mb-4 leading-tight font-condensed">
                     {svc.title}
                   </h3>
-                  <div className="relative z-10 w-8 h-[1px] bg-crimson/50 mb-4" />
+                  <div className="relative z-10 w-8 h-[1px] bg-crimson mb-4" />
                   <p
-                    className="relative z-10 text-sm md:text-base font-light leading-relaxed text-white/70"
+                    className="relative z-10 text-sm md:text-base font-light leading-relaxed text-[#001f3f]/65"
                     style={{ textWrap: "pretty" } as React.CSSProperties}
                   >
                     {svc.desc}
