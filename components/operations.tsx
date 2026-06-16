@@ -1,5 +1,3 @@
-"use client";
-
 export default function Operations() {
   const services = [
     {
@@ -20,13 +18,13 @@ export default function Operations() {
   ];
 
   return (
-    <section className="relative bg-[#000613] px-6 md:px-12 py-28 md:py-36 border-t border-white/5">
+    <section className="relative bg-[#001f3f] px-6 md:px-12 py-28 md:py-36 border-t border-white/5">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
 
         {/* Left: heading block */}
         <div className="lg:col-span-5">
           <h2
-            className="text-4xl md:text-5xl font-bold text-white leading-[1.1] tracking-tight mb-8"
+            className="font-condensed text-5xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight mb-8"
             style={{ textWrap: "balance" } as React.CSSProperties}
           >
             Fully Integrated<br />Dry Bulk<br />Operators
@@ -36,7 +34,7 @@ export default function Operations() {
           </p>
           <a
             href="#"
-            className="inline-block text-sm font-medium text-white/70 border-b border-white/25 pb-0.5 hover:text-white hover:border-white transition-colors duration-200"
+            className="inline-block text-sm font-medium text-white/70 border-b border-white/25 pb-0.5 hover:text-crimson hover:border-crimson transition-colors duration-200"
           >
             View fleet specifications
           </a>

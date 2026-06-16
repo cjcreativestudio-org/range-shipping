@@ -38,10 +38,10 @@ export default function DryBulkPage() {
       <main className="pt-[88px]">
 
         {/* Hero */}
-        <section className="bg-[#000613] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
           <div className="max-w-6xl mx-auto">
             <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-3xl"
+              className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-3xl"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
               Dry-Bulk<br />Chartering
@@ -53,11 +53,11 @@ export default function DryBulkPage() {
         </section>
 
         {/* Service overview */}
-        <section className="bg-[#04080f] px-6 md:px-12 py-24 border-b border-white/5">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 border-b border-white/5">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-8">
               <h2
-                className="text-3xl md:text-4xl font-bold text-white/90 leading-tight tracking-tight mb-8"
+                className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-8"
                 style={{ textWrap: "balance" } as React.CSSProperties}
               >
                 Service Overview
@@ -87,7 +87,7 @@ export default function DryBulkPage() {
         </section>
 
         {/* Capabilities zig-zag */}
-        <section className="bg-[#000613] px-6 md:px-12 py-24 border-b border-white/5">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 border-b border-white/5">
           <div className="max-w-6xl mx-auto flex flex-col gap-20 md:gap-28">
             {capabilities.map((cap, i) => (
               <div
@@ -99,7 +99,7 @@ export default function DryBulkPage() {
                   <div className="flex items-baseline gap-4">
                     <span className="text-xs font-medium text-white/25 tabular-nums mt-0.5">0{i + 1}</span>
                     <h3
-                      className="text-2xl md:text-3xl font-bold text-white/90 leading-tight tracking-tight"
+                      className="font-condensed text-3xl md:text-4xl font-bold text-white leading-[1.05] tracking-tight"
                       style={{ textWrap: "balance" } as React.CSSProperties}
                     >
                       {cap.title}
@@ -119,7 +119,7 @@ export default function DryBulkPage() {
                     alt={cap.alt}
                     className="w-full h-full object-cover grayscale opacity-75"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#000613]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#001f3f]/40 to-transparent" />
                 </div>
               </div>
             ))}
@@ -127,11 +127,11 @@ export default function DryBulkPage() {
         </section>
 
         {/* CTA */}
-        <section className="bg-[#04080f] px-6 md:px-12 py-24">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
             <div className="max-w-xl">
               <h2
-                className="text-3xl md:text-4xl font-bold text-white/90 leading-tight tracking-tight mb-4"
+                className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-4"
                 style={{ textWrap: "balance" } as React.CSSProperties}
               >
                 Inquire About Our Latest Fleet Position
@@ -141,7 +141,7 @@ export default function DryBulkPage() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-              <button className="px-8 py-3.5 bg-white text-[#000613] text-[12px] font-semibold tracking-[0.12em] uppercase hover:bg-white/90 transition-colors duration-200 whitespace-nowrap">
+              <button className="px-8 py-3.5 bg-crimson text-white text-[12px] font-semibold tracking-[0.12em] uppercase hover:bg-crimson/85 transition-colors duration-200 whitespace-nowrap">
                 Contact chartering team
               </button>
               <button className="px-8 py-3.5 border border-white/25 text-[12px] font-medium tracking-[0.12em] uppercase text-white/70 hover:border-white/50 hover:text-white transition-all duration-200 whitespace-nowrap">

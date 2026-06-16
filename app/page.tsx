@@ -1,22 +1,16 @@
-"use client";
-
-import { useEffect } from "react";
 import Nav from "@/components/nav";
 import Hero from "@/components/hero";
 import Stats from "@/components/stats";
 import Operations from "@/components/operations";
 import Sustainability from "@/components/sustainability";
 import Corporate from "@/components/corporate";
+import Inquiry from "@/components/inquiry";
 import Footer from "@/components/footer";
-import { initLenis } from "@/lib/lenis";
+import LenisProvider from "@/components/lenis-provider";
 
 export default function Home() {
-  useEffect(() => {
-    initLenis();
-  }, []);
-
   return (
-    <>
+    <LenisProvider>
       <Nav />
       <main>
         <Hero />
@@ -26,9 +20,10 @@ export default function Home() {
           <Operations />
           <Sustainability />
           <Corporate />
+          <Inquiry />
         </div>
       </main>
       <Footer />
-    </>
+    </LenisProvider>
   );
 }

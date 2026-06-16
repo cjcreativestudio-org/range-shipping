@@ -9,12 +9,14 @@ const config: Config = {
     extend: {
       colors: {
         "deep-navy": "#000613",
+        "crimson": "#bc0007",
         "marine-blue": "#2f87ed",
         "steel-grey": "#50606F",
         "glass-white": "rgba(255,255,255,0.05)",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Barlow", "sans-serif"],
+        condensed: ["'Barlow Condensed'", "sans-serif"],
       },
       keyframes: {
         slideDown: {

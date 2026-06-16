@@ -176,7 +176,7 @@ export default function Hero() {
 
   return (
     <section ref={sectionRef} className="relative h-[600vh] isolate">
-      <div className="sticky top-0 h-screen overflow-hidden bg-black">
+      <div className="sticky top-0 h-screen overflow-hidden bg-[#001f3f]">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
         {/* Dark vignette overlay */}
@@ -190,7 +190,7 @@ export default function Hero() {
             </p>
             <div className="w-48 h-[1px] bg-white/15 relative overflow-hidden">
               <div
-                className="absolute top-0 left-0 h-full bg-white/70 transition-all duration-150"
+                className="absolute top-0 left-0 h-full bg-crimson transition-all duration-150"
                 style={{ width: `${progress * 100}%` }}
               />
             </div>
@@ -255,8 +255,8 @@ export default function Hero() {
           <span className="text-[0.55rem] tracking-[0.4em] text-white/55 uppercase">
             Scroll
           </span>
-          <div className="w-[1px] h-8 bg-white/15 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1/2 bg-white/60 animate-slideDown" />
+          <div className="w-[1px] h-8 bg-crimson/25 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1/2 bg-crimson animate-slideDown" />
           </div>
         </div>
       </div>

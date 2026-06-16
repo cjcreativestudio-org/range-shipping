@@ -14,10 +14,10 @@ export default function AboutPage() {
       <main className="pt-[88px]">
 
         {/* Hero */}
-        <section className="bg-[#000613] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
           <div className="max-w-6xl mx-auto">
             <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-2xl"
+              className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-2xl"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
               About Range<br />Shipping
@@ -29,11 +29,11 @@ export default function AboutPage() {
         </section>
 
         {/* Overview: text + image */}
-        <section className="bg-[#04080f] px-6 md:px-12 py-24 md:py-28 border-b border-white/5">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-28 border-b border-white/5">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div>
               <h2
-                className="text-3xl md:text-4xl font-bold text-white/90 leading-tight tracking-tight mb-8"
+                className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-8"
                 style={{ textWrap: "balance" } as React.CSSProperties}
               >
                 Global Reach,<br />Deep Expertise
@@ -58,17 +58,16 @@ export default function AboutPage() {
         </section>
 
         {/* S&P Market */}
-        <section className="bg-[#000613] px-6 md:px-12 py-24 md:py-28 border-b border-white/5">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-28 border-b border-white/5">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-4">
               <h2
-                className="text-3xl md:text-4xl font-bold text-white/90 leading-tight tracking-tight"
+                className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight"
                 style={{ textWrap: "balance" } as React.CSSProperties}
               >
                 Active in the S&amp;P Market
               </h2>
-              <div className="w-10 h-[2px] bg-white/20 mt-8" />
-            </div>
+              </div>
             <div className="lg:col-span-8">
               <p className="text-[17px] font-light leading-relaxed text-white/65 mb-5" style={{ textWrap: "pretty" } as React.CSSProperties}>
                 Range Shipping remains highly active in the Sale and Purchase market, acting strictly as a principal. We specialise in structuring complex transactions, securing strategic assets, and maintaining an agile portfolio to capitalise on shifting global trade dynamics.
@@ -81,10 +80,10 @@ export default function AboutPage() {
         </section>
 
         {/* Core Mandates — editorial list, not card grid */}
-        <section className="bg-[#04080f] px-6 md:px-12 py-24 md:py-28">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-28">
           <div className="max-w-6xl mx-auto">
             <h2
-              className="text-3xl md:text-4xl font-bold text-white/90 leading-tight tracking-tight mb-16"
+              className="font-condensed text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight mb-16"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
               How We Operate

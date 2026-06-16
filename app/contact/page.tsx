@@ -15,10 +15,10 @@ export default function ContactPage() {
       <main className="pt-[88px]">
 
         {/* Hero */}
-        <section className="bg-[#000613] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
           <div className="max-w-6xl mx-auto">
             <h1
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-3xl"
+              className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-8 max-w-3xl"
               style={{ textWrap: "balance" } as React.CSSProperties}
             >
               Contact<br />Range Shipping
@@ -30,14 +30,14 @@ export default function ContactPage() {
         </section>
 
         {/* Main content */}
-        <section className="bg-[#04080f] px-6 md:px-12 py-24 border-b border-white/5">
+        <section className="bg-[#001f3f] px-6 md:px-12 py-24 border-b border-white/5">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
 
             {/* Left: HQ details + image */}
             <div className="lg:col-span-5 flex flex-col gap-12">
               <div>
                 <h2
-                  className="text-2xl md:text-3xl font-bold text-white/90 leading-tight tracking-tight mb-8"
+                  className="font-condensed text-3xl md:text-4xl font-bold text-white leading-[1.05] tracking-tight mb-8"
                   style={{ textWrap: "balance" } as React.CSSProperties}
                 >
                   London Headquarters
@@ -86,7 +86,7 @@ export default function ContactPage() {
                   alt="Corporate brutalist building facade in London — institutional and austere"
                   className="w-full h-full object-cover grayscale opacity-70"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#04080f]/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#001f3f]/50 to-transparent" />
               </div>
             </div>
 

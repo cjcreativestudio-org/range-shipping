@@ -16,7 +16,7 @@ export default function Stats() {
   }, []);
 
   return (
-    <section ref={ref} className="relative bg-[#000613] px-6 md:px-12 py-28 md:py-36">
+    <section ref={ref} className="relative bg-[#001f3f] px-6 md:px-12 py-28 md:py-36 border-t border-white/5">
       <div className="max-w-6xl mx-auto">
 
         {/* Primary statement — numbers woven into prose, not celebrated as metrics */}
@@ -29,7 +29,7 @@ export default function Stats() {
             <span className="font-semibold text-white">2,973,854 metric tonnes</span>{" "}
             of dry bulk cargo across{" "}
             <span className="font-semibold text-white">118 ports</span>{" "}
-            in 60 countries — the 47th year of continuous operation under single-ownership technical management.
+            in 60 countries. The 47th year of continuous operation under single-ownership technical management.
           </p>
         </div>
 

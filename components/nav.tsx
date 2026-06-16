@@ -1,117 +1,120 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { List, X } from "@phosphor-icons/react";
+
+const links = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/dry-bulk" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[#000613]/90 backdrop-blur-xl border-b border-white/5"
-          : "bg-transparent"
-      }`}
-    >
-      {/* Utility bar */}
-      <div className="hidden md:block border-b border-white/5 py-1 px-8">
-        <div className="max-w-7xl mx-auto flex justify-end items-center gap-8">
-          <a href="/contact" className="flex items-center gap-1 text-white/55 hover:text-white/80 transition-colors">
-            <span className="text-[10px] tracking-[0.15em] uppercase font-medium">Contacts</span>
+    <>
+      {/* Sentinel — sits 60px below top; when it leaves viewport the nav is "scrolled" */}
+      <div ref={sentinelRef} className="absolute top-[60px] left-0 h-px w-full pointer-events-none" aria-hidden />
+
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-[#001f3f]/90 backdrop-blur-xl border-b border-white/5"
+            : "bg-transparent"
+        }`}
+      >
+        {/* Main nav */}
+        <div className="px-6 md:px-8 py-4 max-w-7xl mx-auto flex justify-between items-center">
+          {/* Logo */}
+          <a href="/" className="flex items-center">
+            <div className="bg-white/95 px-3 py-1.5 rounded-sm">
+              <Image
+                src="/logo.jpg"
+                alt="Range Shipping"
+                width={140}
+                height={38}
+                className="h-8 w-auto object-contain"
+                priority
+              />
+            </div>
           </a>
-          <button className="flex items-center gap-1 text-white/55 hover:text-white/80 transition-colors">
-            <span className="text-[10px] tracking-[0.15em] uppercase font-medium">EN</span>
-          </button>
-          <p className="text-[9px] text-white/35 italic">Data delayed at least 15 minutes</p>
-        </div>
-      </div>
 
-      {/* Main nav */}
-      <div className="px-6 md:px-8 py-4 max-w-7xl mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <a href="/" className="flex items-center group">
-          <div className="bg-white/95 px-3 py-1.5 rounded-sm">
-            <Image
-              src="/logo.jpg"
-              alt="Range Shipping"
-              width={140}
-              height={38}
-              className="h-8 w-auto object-contain"
-              priority
-            />
-          </div>
-        </a>
-
-        {/* Desktop nav links */}
-        <nav className="hidden lg:flex items-center gap-8">
-          {[
-            { label: "Home", href: "/" },
-            { label: "About Us", href: "/about" },
-            { label: "Services", href: "/dry-bulk" },
-            { label: "Contact", href: "/contact" },
-          ].map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="text-[11px] tracking-[0.1em] uppercase text-white/50 hover:text-white transition-colors duration-200"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* CTA */}
-        <div className="flex items-center gap-4">
-          <a href="/contact" className="hidden md:block px-5 py-2 border border-white/20 text-[11px] tracking-[0.15em] uppercase text-white/80 hover:bg-white/10 hover:border-white/40 transition-all duration-300">
-            Inquire
-          </a>
-          <button
-            className="lg:hidden text-white/60 hover:text-white transition-colors"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              {menuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="lg:hidden bg-[#000613]/95 backdrop-blur-xl border-t border-white/5 px-6 pb-6">
-          <nav className="flex flex-col gap-4 pt-4">
-            {[
-              { label: "Home", href: "/" },
-              { label: "About Us", href: "/about" },
-              { label: "Services", href: "/dry-bulk" },
-              { label: "Contact", href: "/contact" },
-            ].map((item) => (
+          {/* Desktop nav links */}
+          <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+            {links.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="text-[11px] tracking-[0.1em] uppercase text-white/60 hover:text-white transition-colors"
+                className="text-[11px] tracking-[0.1em] uppercase text-white/50 hover:text-crimson transition-colors duration-200"
               >
                 {item.label}
               </a>
             ))}
-            <a href="/contact" className="mt-2 px-5 py-2 border border-white/20 text-[11px] tracking-[0.15em] uppercase text-white/80 self-start hover:bg-white/10 transition-all">
+          </nav>
+
+          {/* CTA + mobile toggle */}
+          <div className="flex items-center gap-4">
+            <a
+              href="/contact"
+              className="hidden md:block px-5 py-2 bg-crimson border border-crimson text-[11px] tracking-[0.15em] uppercase text-white hover:bg-crimson/80 transition-colors duration-200 active:scale-[0.97] active:transition-none"
+            >
+              Inquire
+            </a>
+            <button
+              className="lg:hidden text-white/60 hover:text-white transition-colors p-1"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="rs-mobile-menu"
+            >
+              {menuOpen ? <X size={22} weight="light" /> : <List size={22} weight="light" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        <div
+          id="rs-mobile-menu"
+          className={`lg:hidden overflow-hidden transition-all duration-300 bg-[#001f3f]/95 backdrop-blur-xl border-t border-white/5 ${
+            menuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <nav className="flex flex-col gap-4 px-6 pt-4 pb-6" aria-label="Mobile navigation">
+            {links.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className="text-[11px] tracking-[0.1em] uppercase text-white/60 hover:text-crimson transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              href="/contact"
+              className="mt-2 px-5 py-2 bg-crimson border border-crimson text-[11px] tracking-[0.15em] uppercase text-white self-start hover:bg-crimson/80 transition-colors active:scale-[0.97] active:transition-none"
+            >
               Inquire
             </a>
           </nav>
         </div>
-      )}
-    </header>
+      </header>
+    </>
   );
 }
