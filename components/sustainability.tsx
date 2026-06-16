@@ -85,19 +85,29 @@ export default function Sustainability() {
       <div className="sticky top-0 h-screen flex flex-col overflow-hidden">
 
         {/* Heading — compact, close to the cards */}
-        <div className="flex-none pt-10 pb-5 px-6 text-center">
-          <p className="text-[0.55rem] tracking-[0.45em] text-white/30 uppercase mb-4">
+        <div className="flex-none relative pt-10 pb-5 px-6 text-center overflow-hidden">
+          {/* Banner background image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/sustainability-banner.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-80 pointer-events-none select-none"
+          />
+          {/* Overlay to keep text legible */}
+          <div className="absolute inset-0 bg-[#001f3f]/50 pointer-events-none" />
+          <p className="relative z-10 text-[0.55rem] tracking-[0.45em] text-white/30 uppercase mb-4">
             Environmental Policy
           </p>
           <h2
-            className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.0] tracking-tight"
+            className="relative z-10 font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.0] tracking-tight"
             style={{ textWrap: "balance" } as React.CSSProperties}
           >
             Low Environmental
             <br />
             Impact
           </h2>
-          <p className="text-[14px] font-light text-white/45 mt-4 max-w-md mx-auto leading-relaxed">
+          <p className="relative z-10 text-[14px] font-light text-white/45 mt-4 max-w-md mx-auto leading-relaxed">
             IMO 2030 compliant across active fleet. Net zero target 2050.
           </p>
         </div>
