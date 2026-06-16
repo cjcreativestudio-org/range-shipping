@@ -88,7 +88,18 @@ export default function Operations() {
       <div className="sticky top-0 h-screen flex overflow-hidden">
 
         {/* Left column — heading + meta */}
-        <div className="w-1/2 flex flex-col justify-center px-8 md:px-12 lg:px-16 border-r border-white/5">
+        <div className="w-1/2 relative flex flex-col justify-center px-8 md:px-12 lg:px-16 border-r border-white/5 overflow-hidden">
+          {/* Background ship image */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/bulk-carrier.png"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-20 pointer-events-none select-none"
+          />
+          {/* Dark gradient overlay so text remains legible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f]/80 via-[#001f3f]/60 to-[#001f3f]/20 pointer-events-none" />
+          <div className="relative z-10 flex flex-col">
           <h2
             className="font-condensed text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.0] tracking-tight mb-8"
             style={{ textWrap: "balance" } as React.CSSProperties}
@@ -125,6 +136,7 @@ export default function Operations() {
                 }}
               />
             ))}
+          </div>
           </div>
         </div>
 
