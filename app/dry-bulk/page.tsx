@@ -42,8 +42,17 @@ export default function DryBulkPage() {
       <main className="pt-[88px]">
 
         {/* Hero */}
-        <section className="bg-[#001f3f] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
-          <div className="max-w-6xl mx-auto">
+        <section className="relative overflow-hidden bg-[#001f3f] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
+          {/* Carrier background — mobile only */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/dry-bulk-bg.png"
+            alt="Dry-bulk carrier vessel at sea"
+            aria-hidden="true"
+            className="md:hidden absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+          />
+          <div className="md:hidden absolute inset-0 bg-gradient-to-t from-[#001f3f] via-[#001f3f]/70 to-[#001f3f]/50 pointer-events-none z-0" />
+          <div className="relative z-10 max-w-6xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-1 h-4 bg-crimson" />
               <p className="text-[10px] font-medium tracking-[0.35em] uppercase text-white/40">Services</p>
