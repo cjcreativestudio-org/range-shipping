@@ -1,6 +1,5 @@
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
-import DryBulkParallaxSection from "@/components/dry-bulk-parallax-section";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -46,10 +45,10 @@ export default function DryBulkPage() {
           {/* Carrier vessel background */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/dry-bulk-bg.png"
+            src="/dry-bulk-parallax.png"
             alt="Dry-bulk carrier vessel at sea"
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-[60%_center] pointer-events-none select-none z-0"
+            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none z-0"
           />
           {/* Left-to-right scrim keeps text legible while the vessel stays visible */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-[#001f3f]/80 to-[#001f3f]/40 pointer-events-none z-0" />
@@ -106,9 +105,6 @@ export default function DryBulkPage() {
             </div>
           </div>
         </section>
-
-        {/* Parallax photo transition */}
-        <DryBulkParallaxSection />
 
         {/* Capabilities */}
         <section className="bg-[#001f3f] px-6 md:px-12 py-24 border-b border-white/5">
