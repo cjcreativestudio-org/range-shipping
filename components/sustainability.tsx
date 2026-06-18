@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { getLenis } from "@/lib/lenis";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 // Card dimensions (vw units) — drives horizontal stacking math
 const CARD_W = 32;        // each card width in vw
@@ -45,6 +46,7 @@ export default function Sustainability() {
   const [progress, setProgress] = useState(0);
   const [bannerParallax, setBannerParallax] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -83,6 +85,60 @@ export default function Sustainability() {
   }, []);
 
   const activeIndex = Math.min(Math.floor((progress / ANIM_END) * 3), 2);
+
+  // ── Mobile: static stacked layout (no pinning, no horizontal slider) ──
+  if (isMobile) {
+    return (
+      <div className="relative bg-[#001f3f] border-t border-white/5 overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/sustainability-banner.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none select-none z-0"
+        />
+        <div className="absolute inset-0 bg-[#001f3f]/55 pointer-events-none z-0" />
+
+        <div className="relative z-10 px-6 py-20">
+          <p className="text-[0.6rem] tracking-[0.45em] text-white/40 uppercase mb-4">
+            Environmental Policy
+          </p>
+          <h2
+            className="font-bold text-white text-4xl leading-[1.08] mb-4"
+            style={{ letterSpacing: "-0.02em", textWrap: "balance" } as React.CSSProperties}
+          >
+            Low Environmental Impact
+          </h2>
+          <p className="text-[14px] font-light text-white/55 mb-12 leading-relaxed max-w-md">
+            IMO 2030 compliant across active fleet. Net zero target 2050.
+          </p>
+
+          <div className="flex flex-col gap-5">
+            {SECTIONS.map((section) => (
+              <div
+                key={section.num}
+                className="border border-white/10 bg-[#001f3f]/40 flex flex-col p-6"
+              >
+                <span className="text-[0.6rem] tracking-[0.35em] text-white/30 uppercase mb-4 block">
+                  {section.num}
+                </span>
+                <h3 className="text-xl font-semibold text-white/90 leading-snug mb-5">
+                  {section.title}
+                </h3>
+                <div className="w-8 h-[1px] bg-[#0074D9]/50 mb-5" />
+                <p
+                  className="text-[15px] font-light leading-relaxed text-white/60"
+                  style={{ textWrap: "pretty" } as React.CSSProperties}
+                >
+                  {section.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="relative min-h-[300vh] bg-[#001f3f] border-t border-white/5">

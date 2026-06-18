@@ -154,7 +154,7 @@ export default function Memberships() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {MEMBERSHIPS.map((m, i) => {
                   if (i < 2) {
                     return <MemberCard key={m.id} m={m} style={cardStyle(i)} onClick={() => setSelected(m)} />;
@@ -163,9 +163,10 @@ export default function Memberships() {
                   // BIMCO (i === 2) — includes the teaser card behind it
                   return (
                     <div key={m.id} className="relative" style={cardStyle(i)}>
-                      {/* Teaser card — peeks from behind BIMCO, expands right on hover */}
+                      {/* Teaser card — peeks from behind BIMCO, expands right on hover.
+                          Hover-driven desktop affordance; hidden on mobile where it would overflow. */}
                       <div
-                        className="absolute inset-y-1 z-0 cursor-pointer"
+                        className="hidden md:block absolute inset-y-1 z-0 cursor-pointer"
                         style={{
                           right: 0,
                           width: "160px",
@@ -229,7 +230,7 @@ export default function Memberships() {
               </div>
 
               {/* Placeholder cards — replace once assets arrive */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {SPONSORSHIPS.map((s) => (
                   <div key={s.id} className="border border-black/8 bg-white p-5 flex flex-col justify-between min-h-[200px]">
                     <div className="h-16 flex items-center">
