@@ -43,15 +43,17 @@ export default function DryBulkPage() {
 
         {/* Hero */}
         <section className="relative overflow-hidden bg-[#001f3f] px-6 md:px-12 py-24 md:py-32 border-b border-white/5">
-          {/* Carrier background — mobile only */}
+          {/* Carrier vessel background */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/dry-bulk-bg.png"
             alt="Dry-bulk carrier vessel at sea"
             aria-hidden="true"
-            className="md:hidden absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+            className="absolute inset-0 w-full h-full object-cover object-[60%_center] pointer-events-none select-none z-0"
           />
-          <div className="md:hidden absolute inset-0 bg-gradient-to-t from-[#001f3f] via-[#001f3f]/70 to-[#001f3f]/50 pointer-events-none z-0" />
+          {/* Left-to-right scrim keeps text legible while the vessel stays visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-[#001f3f]/80 to-[#001f3f]/40 pointer-events-none z-0" />
+          <div className="absolute inset-0 bg-[#001f3f]/20 pointer-events-none z-0" />
           <div className="relative z-10 max-w-6xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-1 h-4 bg-crimson" />
