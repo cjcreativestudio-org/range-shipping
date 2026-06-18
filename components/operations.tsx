@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState } from "react";
 import { getLenis } from "@/lib/lenis";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
 const EASE_OUT_QUART = "cubic-bezier(0.165, 0.84, 0.44, 1)";
 
@@ -44,7 +43,6 @@ export default function Operations() {
   const [progress, setProgress] = useState(0);
   const [bannerParallax, setBannerParallax] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -83,10 +81,12 @@ export default function Operations() {
 
   const activeIndex = Math.min(Math.floor((progress / ANIM_END) * 3), 2);
 
-  // ── Mobile: static stacked layout (no pinning, no scroll choreography) ──
-  if (isMobile) {
-    return (
-      <div className="relative bg-[#001f3f] border-t border-white/5 overflow-hidden">
+  return (
+    <>
+      {/* ── Mobile: static stacked layout (no pinning, no scroll choreography). ──
+          Rendered in HTML and shown below md via CSS so it is correct on first
+          paint without waiting for JS. */}
+      <div className="md:hidden relative bg-[#001f3f] border-t border-white/5 overflow-hidden">
         {/* Static background image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -141,11 +141,9 @@ export default function Operations() {
           </div>
         </div>
       </div>
-    );
-  }
 
-  return (
-    <div ref={containerRef} className="relative min-h-[300vh] bg-[#001f3f] border-t border-white/5">
+      {/* ── Desktop: pinned scroll choreography (md and up). Unchanged. ── */}
+      <div ref={containerRef} className="hidden md:block relative min-h-[300vh] bg-[#001f3f] border-t border-white/5">
       <div className="sticky top-0 h-screen flex overflow-hidden relative">
 
         {/* Full-section parallax background image */}
@@ -254,5 +252,6 @@ export default function Operations() {
 
       </div>
     </div>
+    </>
   );
 }
