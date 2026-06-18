@@ -26,10 +26,10 @@ export default function Nav() {
 
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-gray-100/60">
         {/* Main nav */}
-        <div className="px-6 md:px-8 py-3 max-w-7xl mx-auto relative flex items-center justify-center">
+        <div className="px-6 md:px-8 py-3 min-h-[60px] md:min-h-0 max-w-7xl mx-auto relative flex items-center justify-center">
 
-          {/* Logo — pinned left */}
-          <div className="absolute left-6 md:left-8">
+          {/* Logo — pinned left, vertically centred so it never overhangs the bar */}
+          <div className="absolute left-6 md:left-8 inset-y-0 flex items-center">
             <a href="/">
               <Image src="/logo.png" alt="Range Shipping" width={120} height={60} className="h-10 w-auto object-contain" />
             </a>
@@ -49,7 +49,7 @@ export default function Nav() {
           </nav>
 
           {/* CTA — pinned right */}
-          <div className="absolute right-6 md:right-8 flex items-center gap-4">
+          <div className="absolute right-6 md:right-8 inset-y-0 flex items-center gap-4">
             <a
               href="/contact"
               className="hidden md:block px-5 py-2 bg-crimson border border-crimson text-[11px] tracking-[0.15em] uppercase text-white hover:bg-crimson/80 transition-colors duration-200 active:scale-[0.97] active:transition-none"

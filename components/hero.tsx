@@ -240,7 +240,7 @@ export default function Hero() {
             <div
               key={i}
               className={`absolute inset-0 flex flex-col items-center pointer-events-none z-10 ${
-                block.type === "stat" ? "justify-center" : "justify-end pb-28"
+                block.type === "stat" ? "justify-center" : "justify-end pb-16 md:pb-28"
               }`}
               style={{
                 opacity,
@@ -259,7 +259,7 @@ export default function Hero() {
                   <p className="text-xs md:text-sm tracking-[0.35em] text-white/65 uppercase mb-5">
                     {block.label}
                   </p>
-                  <p className="text-7xl md:text-9xl font-semibold tracking-[0.06em] text-white uppercase leading-none">
+                  <p className="text-5xl sm:text-7xl md:text-9xl font-semibold tracking-[0.06em] text-white uppercase leading-none">
                     {block.value}
                   </p>
                 </div>
