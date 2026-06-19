@@ -48,11 +48,12 @@ export default function DryBulkPage() {
             src="/dry-bulk-parallax.png"
             alt="Dry-bulk carrier vessel at sea"
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none z-0"
+            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none z-0 md:saturate-[1.2] md:contrast-[1.06]"
           />
-          {/* Left-to-right scrim keeps text legible while the vessel stays visible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-[#001f3f]/80 to-[#001f3f]/40 pointer-events-none z-0" />
-          <div className="absolute inset-0 bg-[#001f3f]/20 pointer-events-none z-0" />
+          {/* Left-to-right scrim keeps text legible while the vessel stays visible.
+              Desktop (md:) uses a lighter scrim so the vessel reads more vivid. */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#001f3f] via-[#001f3f]/80 to-[#001f3f]/40 md:from-[#001f3f]/85 md:via-[#001f3f]/40 md:to-transparent pointer-events-none z-0" />
+          <div className="absolute inset-0 bg-[#001f3f]/20 md:bg-transparent pointer-events-none z-0" />
           <div className="relative z-10 max-w-6xl mx-auto">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-1 h-4 bg-crimson" />
